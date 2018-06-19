@@ -26,7 +26,7 @@
         simple:simple_tag_orientation="right_top"
         simple:simple_tag_round_radius="5dp"
         simple:simple_tag_text="test"
-        simple:simple_tag_textColor="#f6f6f6"
+        simple:simple_tag_textColor="#faffa4"
         simple:simple_tag_textSize="16sp"
         simple:simple_tag_width="23dip" />
 
