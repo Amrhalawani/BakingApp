@@ -27,7 +27,7 @@
         simple:simple_tag_round_radius="5dp"
         simple:simple_tag_text="test"
         simple:simple_tag_textColor="#f6f6f6"
-        simple:simple_tag_textSize="18sp"
+        simple:simple_tag_textSize="16sp"
         simple:simple_tag_width="23dip" />
 
     <ImageView
@@ -55,15 +55,16 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/hotpizza"
         android:text="Recipe Name"
         android:textColor="#ffffff"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.25"
+        app:layout_constraintHorizontal_bias="0.11"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
+        app:layout_constraintVertical_bias="0.58000004" />
 
 
 </android.support.constraint.ConstraintLayout>
