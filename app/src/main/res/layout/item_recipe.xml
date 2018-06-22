@@ -29,12 +29,12 @@
             simple:layout_constraintStart_toStartOf="parent"
             simple:layout_constraintTop_toTopOf="parent"
             simple:simple_corner_distance="60dp"
-            simple:simple_tag_background_color="@color/colorPrimaryDark"
+            simple:simple_tag_background_color="#faffa4"
             simple:simple_tag_enable="true"
             simple:simple_tag_orientation="right_top"
             simple:simple_tag_round_radius="5dp"
             simple:simple_tag_text="test"
-            simple:simple_tag_textColor="#faffa4"
+            simple:simple_tag_textColor="@color/colorPrimaryDark"
             simple:simple_tag_textSize="14sp"
             simple:simple_tag_width="23dip" />
 
