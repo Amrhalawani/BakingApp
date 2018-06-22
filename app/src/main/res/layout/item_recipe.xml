@@ -20,15 +20,24 @@
         simple:layout_constraintEnd_toEndOf="parent"
         simple:layout_constraintStart_toStartOf="parent"
         simple:layout_constraintTop_toTopOf="parent"
-        simple:simple_corner_distance="50dp"
+        simple:simple_corner_distance="60dp"
         simple:simple_tag_background_color="@color/colorPrimaryDark"
         simple:simple_tag_enable="true"
         simple:simple_tag_orientation="right_top"
         simple:simple_tag_round_radius="5dp"
         simple:simple_tag_text="test"
         simple:simple_tag_textColor="#faffa4"
-        simple:simple_tag_textSize="16sp"
+        simple:simple_tag_textSize="14sp"
         simple:simple_tag_width="23dip" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+
+        android:src="@drawable/scrim_book_details"
+        app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
+        app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
+        app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
+        app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
 
     <ImageView
         android:layout_width="0dp"
@@ -65,6 +74,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.58000004" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>

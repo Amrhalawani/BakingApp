@@ -27,6 +27,7 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
     List<RecipeModel> list = new ArrayList<>();
     Context context;
     LayoutInflater layoutInflater;
+    OnItemClickListener onItemClickListener;
 
     public RecipesRecyclerAdaptor(Context context) {
         this.context = context;
@@ -36,6 +37,13 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
     public void updateData(List newList) {
         this.list = newList;
         notifyDataSetChanged();
+    }
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -56,8 +64,6 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
         holder.RecipeName.setText(RModel.getName());
         holder.mSimpleTagImageViewServings.setTagText("Servings: "+ RModel.getServings()); // text Tag lib
 
-
-
     }
 
     @Override
@@ -65,12 +71,13 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
         return list.size();
     }
 
-    class myViewholder extends RecyclerView.ViewHolder {
+
+
+    class myViewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView RecipeName;
         SimpleTagImageView mSimpleTagImageViewServings;
 
 
-        @SuppressLint("CutPasteId")
         public myViewholder(View itemView) {
             super(itemView);
             Log.e(TAG, "myViewholder: ");
@@ -78,5 +85,12 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
             mSimpleTagImageViewServings = itemView.findViewById(R.id.item_servings_tag);
 
         }
+        @Override
+        public void onClick(View view) {
+            if (onItemClickListener != null)
+                onItemClickListener.onItemClick(getAdapterPosition());
+        }
     }
+
+
 }

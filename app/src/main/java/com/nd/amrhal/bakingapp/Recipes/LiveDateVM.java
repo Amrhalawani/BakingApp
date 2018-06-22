@@ -23,7 +23,7 @@ public class LiveDateVM extends ViewModel {
 
     public MutableLiveData<List<RecipeModel>> getCurrentName() {
         if (mCurrentName == null) {
-            mCurrentName = new MutableLiveData<List<RecipeModel>>();
+            mCurrentName = new MutableLiveData<>();
             getRecipes();
         }
         //mCurrentName.postValue(respons[0]);
@@ -53,7 +53,8 @@ public class LiveDateVM extends ViewModel {
 
             @Override
             public void onFailure(Call<List<RecipeModel>> call, Throwable t) {
-
+                t.getLocalizedMessage();
+           Log.e("tag", "failure to retrive data");
             }
         });
     }
