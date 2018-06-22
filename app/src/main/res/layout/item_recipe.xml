@@ -1,81 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/linearLayout"
+
+    >
 
 
-    <net.wujingchao.android.view.SimpleTagImageView xmlns:simple="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/item_servings_tag"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constrainLayout"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
-        android:layout_margin="3dip"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/placeholder"
-        simple:layout_constraintEnd_toEndOf="parent"
-        simple:layout_constraintStart_toStartOf="parent"
-        simple:layout_constraintTop_toTopOf="parent"
-        simple:simple_corner_distance="60dp"
-        simple:simple_tag_background_color="@color/colorPrimaryDark"
-        simple:simple_tag_enable="true"
-        simple:simple_tag_orientation="right_top"
-        simple:simple_tag_round_radius="5dp"
-        simple:simple_tag_text="test"
-        simple:simple_tag_textColor="#faffa4"
-        simple:simple_tag_textSize="14sp"
-        simple:simple_tag_width="23dip" />
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-
-        android:src="@drawable/scrim_book_details"
-        app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
-        app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
-        app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
-        app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
-
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-
-        android:src="@drawable/scrim_book_details"
-        app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
-        app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
-        app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
-        app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
-
-    <View
-        android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:background="#fff"
-        app:layout_constraintEnd_toEndOf="@+id/item_recipe_name"
-        app:layout_constraintTop_toBottomOf="@+id/item_recipe_name" />
-
-    <TextView
-        android:id="@+id/item_recipe_name"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/hotpizza"
-        android:text="Recipe Name"
-        android:textColor="#ffffff"
-        android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58000004" />
+        android:layout_height="wrap_content">
 
 
+        <net.wujingchao.android.view.SimpleTagImageView xmlns:simple="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/item_servings_tag"
+            android:layout_width="match_parent"
+            android:layout_height="200dip"
+            android:layout_margin="3dip"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/placeholder"
+            simple:layout_constraintEnd_toEndOf="parent"
+            simple:layout_constraintStart_toStartOf="parent"
+            simple:layout_constraintTop_toTopOf="parent"
+            simple:simple_corner_distance="60dp"
+            simple:simple_tag_background_color="@color/colorPrimaryDark"
+            simple:simple_tag_enable="true"
+            simple:simple_tag_orientation="right_top"
+            simple:simple_tag_round_radius="5dp"
+            simple:simple_tag_text="test"
+            simple:simple_tag_textColor="#faffa4"
+            simple:simple_tag_textSize="14sp"
+            simple:simple_tag_width="23dip" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+
+            android:src="@drawable/scrim_book_details"
+            app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
+            app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
+            app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
+            app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+
+            android:src="@drawable/scrim_book_details"
+            app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
+            app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
+            app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
+            app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
+
+        <View
+            android:layout_width="300dp"
+            android:layout_height="1dp"
+            android:background="#fff"
+            app:layout_constraintEnd_toEndOf="@+id/item_recipe_name"
+            app:layout_constraintTop_toBottomOf="@+id/item_recipe_name" />
+
+        <TextView
+            android:id="@+id/item_recipe_name"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/hotpizza"
+            android:text="Recipe Name"
+            android:textColor="#ffffff"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.58000004" />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>
+
