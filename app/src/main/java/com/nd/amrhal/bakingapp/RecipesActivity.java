@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public class RecipesActivity extends AppCompatActivity {
 
     //widget doeasn't work with constratnlayout
     //http://www.jsonschema2pojo.org/
+
+    final static String RECIPE_PARC_KEY = "recipemodel";
 
     Context context;
 
@@ -63,9 +66,9 @@ public class RecipesActivity extends AppCompatActivity {
                         RecipeModel recipeModel = recipeModels.get(position);
 
                         Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-                        intent.putExtra("id",recipeModel.getId());
+                        intent.putExtra(RECIPE_PARC_KEY,recipeModel); //Parcelable
                         startActivity(intent);
-                        Toast.makeText(RecipesActivity.this, "pos " + position+" And id ="+recipeModel.getId(), Toast.LENGTH_SHORT).show();
+
                     }
                 });
 

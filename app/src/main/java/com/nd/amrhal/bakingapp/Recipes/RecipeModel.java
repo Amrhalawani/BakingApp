@@ -1,12 +1,15 @@
 package com.nd.amrhal.bakingapp.Recipes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
 import com.nd.amrhal.bakingapp.Step.StepModel;
 
 import java.util.List;
 
-public class RecipeModel {
+public class RecipeModel implements Parcelable{
 
     public RecipeModel(int id, String name, List<IngredientModel> ingredients, List<StepModel> steps, int servings) {
         this.id = id;
@@ -31,6 +34,24 @@ public class RecipeModel {
 
     @SerializedName("servings")
     private int servings;
+
+    protected RecipeModel(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        servings = in.readInt();
+    }
+
+    public static final Creator<RecipeModel> CREATOR = new Creator<RecipeModel>() {
+        @Override
+        public RecipeModel createFromParcel(Parcel in) {
+            return new RecipeModel(in);
+        }
+
+        @Override
+        public RecipeModel[] newArray(int size) {
+            return new RecipeModel[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -72,6 +93,17 @@ public class RecipeModel {
         this.servings = servings;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeInt(servings);
+    }
 
 
 //    @SerializedName("id")
