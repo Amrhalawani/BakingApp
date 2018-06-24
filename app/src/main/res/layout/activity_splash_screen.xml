@@ -6,19 +6,30 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     tools:context=".SplashScreen">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="30dp"
+        android:gravity="center"
+        android:textSize="40sp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text="Baking Time"
-     />
+        android:textColor="@color/colorAccent"
+        android:fontFamily="@font/pacifico"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:src="@mipmap/ic_launcher_foreground"
+        />
+
+
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:layout_gravity="center" />
 
 </LinearLayout>

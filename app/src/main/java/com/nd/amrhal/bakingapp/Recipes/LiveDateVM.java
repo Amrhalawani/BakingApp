@@ -2,7 +2,13 @@ package com.nd.amrhal.bakingapp.Recipes;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.View;
+
+import com.nd.amrhal.bakingapp.RecipesActivity;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,10 +26,9 @@ public class LiveDateVM extends ViewModel {
     // Create a LiveData with a String
     private MutableLiveData<List<RecipeModel>> mCurrentName;
 
-
     public MutableLiveData<List<RecipeModel>> getCurrentName() {
         if (mCurrentName == null) {
-            mCurrentName = new MutableLiveData<List<RecipeModel>>();
+            mCurrentName = new MutableLiveData<>();
             getRecipes();
         }
         //mCurrentName.postValue(respons[0]);
@@ -53,10 +58,12 @@ public class LiveDateVM extends ViewModel {
 
             @Override
             public void onFailure(Call<List<RecipeModel>> call, Throwable t) {
-
+                t.getLocalizedMessage();
+                Log.e("tag", "failure to retrive data");
             }
         });
     }
+
 
 // Rest of the ViewModel...
 }
