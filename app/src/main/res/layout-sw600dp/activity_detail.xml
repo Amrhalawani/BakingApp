@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
+
     <fragment
         android:id="@+id/FragmentDetail"
         android:name="com.nd.amrhal.bakingapp.RecipeDetailFragment"

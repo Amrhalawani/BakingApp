@@ -4,6 +4,11 @@ package com.nd.amrhal.bakingapp.Ingredient;
 
 import com.google.gson.annotations.SerializedName;
 public class IngredientModel {
+    public IngredientModel(String quantity, String measure, String ingredient) {
+        this.quantity = quantity;
+        this.measure = measure;
+        this.ingredient = ingredient;
+    }
 
     @SerializedName("quantity")
     private String quantity;

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecipeStepDetailFragment"
-    android:background="#fc002b71">
+    android:background="#fc002b71"
+    android:alpha="0.3">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

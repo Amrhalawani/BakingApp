@@ -3,35 +3,55 @@ package com.nd.amrhal.bakingapp;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.widget.Toast;
 
+import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
 import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DetailActivity extends AppCompatActivity {
+    RecipeModel recipeModel;
+    List<IngredientModel> arrayList;
     boolean mTwopane = false;
+
+
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        RecipeModel recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
+        recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
+        arrayList = new ArrayList<>();
+        arrayList = recipeModel.getIngredients();
+
+
         if (findViewById(R.id.linearLayoutforStepfragment) != null) {
             mTwopane = true;
-            setupRecipeDetailsFragment();
-            setupRecipeStepDetailsfragment();
-            Toast.makeText(this, "tablet", Toast.LENGTH_SHORT).show();
-        }else{
-
-            setupRecipeDetailsFragment();
+            if (savedInstanceState == null) {
+                setupRecipeDetailsFragment();
+                setupRecipeStepDetailsfragment();
+                Toast.makeText(this, "tablet", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            mTwopane = false;
+            if (savedInstanceState == null) {
+                setupRecipeDetailsFragment();
+            }
             Toast.makeText(this, "phone", Toast.LENGTH_SHORT).show();
-
         }
         Toast.makeText(this, "name is " + recipeModel.getName(), Toast.LENGTH_SHORT).show();
     }
 
     private void setupRecipeDetailsFragment() {
+        Bundle bundle = new Bundle();
+//        bundle.put("id", id);
+//        reviewsFragment.setArguments(bundle);
         RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .add(R.id.FragmentDetail, recipeDetailFragment)
                 .commit();
