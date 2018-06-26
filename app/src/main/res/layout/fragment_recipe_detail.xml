@@ -1,16 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecipeDetailFragment"
-    android:background="#530071"
-    android:alpha="0.3">
-
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
+    android:alpha="0.9">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Recipe Detail"
-        />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Ingredient List :"
+        android:textSize="20sp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"/>
 
-</FrameLayout>
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardBackgroundColor="@color/colorPrimary"
+        card_view:cardElevation="20dp"
+
+        >
+
+        <TextView
+            android:id="@+id/ingredientTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="Ingredient List:"
+            android:textSize="17sp"
+            android:textColor="#000000"
+
+            />
+
+
+    </android.support.v7.widget.CardView>
+
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/recycler_view_steps"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       />
+
+
+</LinearLayout>

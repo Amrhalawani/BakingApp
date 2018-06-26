@@ -15,11 +15,13 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
 import com.nd.amrhal.bakingapp.Recipes.LiveDateVM;
 import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 import com.nd.amrhal.bakingapp.Recipes.RecipesRecyclerAdaptor;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,6 +31,7 @@ public class RecipesActivity extends AppCompatActivity {
     //http://www.jsonschema2pojo.org/
 
     final static String RECIPE_PARC_KEY = "recipemodel";
+ final static String INGREDIANT_PARC_KEY = "ingrediantmodel";
 
     Context context;
 
@@ -53,7 +56,7 @@ public class RecipesActivity extends AppCompatActivity {
         // Get the ViewModel.
         mLiveDate = ViewModelProviders.of(this).get(LiveDateVM.class);
         // Create the observer which updates the UI.
-         Observer<List<RecipeModel>> nameObserver = new Observer<List<RecipeModel>>() {
+        Observer<List<RecipeModel>> nameObserver = new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable final List<RecipeModel> recipeModels) {
                 textView.setText("List size: " + recipeModels.size());
@@ -63,10 +66,13 @@ public class RecipesActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(int position) {
                         Log.e("TAG", "onItemClick: pos" + position);
+
                         RecipeModel recipeModel = recipeModels.get(position);
 
-                        Intent intent = new Intent(getApplicationContext(),DetailActivity.class);
-                        intent.putExtra(RECIPE_PARC_KEY,recipeModel); //Parcelable
+                        Intent intent = new Intent(RecipesActivity.this, DetailActivity.class);
+
+                        intent.putExtra(RECIPE_PARC_KEY, recipeModel); //Parcelable
+
                         startActivity(intent);
 
                     }
@@ -77,7 +83,6 @@ public class RecipesActivity extends AppCompatActivity {
         };
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         mLiveDate.getCurrentName().observe(this, nameObserver);
-
 
 
     }

@@ -2,8 +2,13 @@ package com.nd.amrhal.bakingapp.Ingredient;
 
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
-public class IngredientModel {
+public class IngredientModel implements Parcelable{
+
+
     public IngredientModel(String quantity, String measure, String ingredient) {
         this.quantity = quantity;
         this.measure = measure;
@@ -18,6 +23,24 @@ public class IngredientModel {
 
     @SerializedName("ingredient")
     private String ingredient;
+
+    protected IngredientModel(Parcel in) {
+        quantity = in.readString();
+        measure = in.readString();
+        ingredient = in.readString();
+    }
+
+    public static final Creator<IngredientModel> CREATOR = new Creator<IngredientModel>() {
+        @Override
+        public IngredientModel createFromParcel(Parcel in) {
+            return new IngredientModel(in);
+        }
+
+        @Override
+        public IngredientModel[] newArray(int size) {
+            return new IngredientModel[size];
+        }
+    };
 
     public String getQuantity() {
         return quantity;
@@ -43,4 +66,15 @@ public class IngredientModel {
         this.ingredient = ingredient;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(quantity);
+        dest.writeString(measure);
+        dest.writeString(ingredient);
+    }
 }

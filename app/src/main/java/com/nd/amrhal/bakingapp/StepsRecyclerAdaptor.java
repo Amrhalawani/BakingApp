@@ -1,8 +1,7 @@
-package com.nd.amrhal.bakingapp.Recipes;
+package com.nd.amrhal.bakingapp;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -13,28 +12,23 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nd.amrhal.bakingapp.DetailActivity;
-import com.nd.amrhal.bakingapp.R;
-import com.nd.amrhal.bakingapp.RecipesActivity;
-
-import net.wujingchao.android.view.SimpleTagImageView;
-
+import com.nd.amrhal.bakingapp.Step.StepModel;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Amr Halawani on 18/06/2018.
+ * Created by Amr Halawani on 26/06/2018.
  */
 
-public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecyclerAdaptor.myViewholder> {
+public class StepsRecyclerAdaptor extends RecyclerView.Adapter<StepsRecyclerAdaptor.myViewholder> {
 
     private static final String TAG = "TAG";
-    List<RecipeModel> list = new ArrayList<>();
+    List<StepModel> list = new ArrayList<>();
     Context context;
     LayoutInflater layoutInflater;
     OnItemClickListener onItemClickListener;
 
-    public RecipesRecyclerAdaptor(Context context) {
+    public StepsRecyclerAdaptor(Context context) {
         this.context = context;
     }
 
@@ -50,19 +44,17 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
     public myViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.item_recipe, parent, false);
+        View view = layoutInflater.inflate(R.layout.item_step, parent, false);
 
-        RecipesRecyclerAdaptor.myViewholder myViewholder = new RecipesRecyclerAdaptor.myViewholder(view);
+        StepsRecyclerAdaptor.myViewholder myViewholder = new StepsRecyclerAdaptor.myViewholder(view);
 
         return myViewholder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull myViewholder holder, final int position) {
-        RecipeModel RModel = list.get(position);
-        holder.RecipeName.setText(RModel.getName());
-        holder.mSimpleTagImageViewServings.setTagText("Servings: " + RModel.getServings()); // text Tag lib
-
+        StepModel SModel = list.get(position);
+        holder.step.setText(SModel.getShortDescription());
     }
 
     @Override
@@ -80,18 +72,17 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
     }
 
     class myViewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView RecipeName;
-        SimpleTagImageView mSimpleTagImageViewServings;
+        TextView step;
         ConstraintLayout constraintLayout;
         LinearLayout linearLayout;
 
         public myViewholder(View itemView) {
             super(itemView);
             Log.e(TAG, "myViewholder: ");
-            RecipeName = itemView.findViewById(R.id.item_recipe_name);
-            mSimpleTagImageViewServings = itemView.findViewById(R.id.item_servings_tag);
-            constraintLayout = itemView.findViewById(R.id.constrainLayout);
-            linearLayout = itemView.findViewById(R.id.linearLayout);
+            step = itemView.findViewById(R.id.item_step_name);
+
+//            constraintLayout = itemView.findViewById(R.id.constrainLayout);
+//            linearLayout = itemView.findViewById(R.id.linearLayout);
             itemView.setOnClickListener(this);
         }
 

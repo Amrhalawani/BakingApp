@@ -1,5 +1,7 @@
 package com.nd.amrhal.bakingapp;
 
+import android.app.Fragment;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,10 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
-    RecipeModel recipeModel;
-    List<IngredientModel> arrayList;
-    boolean mTwopane = false;
 
+    final static String INGREDIANT_LIST_KEY = "ingrediantlist";
+
+    RecipeModel recipeModel;
+
+    List<IngredientModel> arrayList;
+
+    boolean mTwopane = false;
 
     FragmentManager fragmentManager;
 
@@ -24,10 +30,8 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
-        arrayList = new ArrayList<>();
-        arrayList = recipeModel.getIngredients();
 
+        recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
 
         if (findViewById(R.id.linearLayoutforStepfragment) != null) {
             mTwopane = true;
@@ -43,18 +47,26 @@ public class DetailActivity extends AppCompatActivity {
             }
             Toast.makeText(this, "phone", Toast.LENGTH_SHORT).show();
         }
+
         Toast.makeText(this, "name is " + recipeModel.getName(), Toast.LENGTH_SHORT).show();
+
     }
 
     private void setupRecipeDetailsFragment() {
-        Bundle bundle = new Bundle();
-//        bundle.put("id", id);
-//        reviewsFragment.setArguments(bundle);
-        RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
-        fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .add(R.id.FragmentDetail, recipeDetailFragment)
-                .commit();
+
+        Fragment recipeDetailFragment = getFragmentManager().findFragmentById(R.id.FragmentDetail);
+
+
+//        Bundle bundle = new Bundle();
+//        arrayList = recipeModel.getIngredients();
+////      bundle.putParcelableArrayList("ingredients", (ArrayList<? extends Parcelable>) arrayList);
+//        bundle.putParcelableArrayList(INGREDIANT_LIST_KEY, (ArrayList<? extends Parcelable>) recipeModel.getIngredients());
+//
+//        recipeDetailFragment.setArguments(bundle);
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .add(R.id.FragmentDetail, recipeDetailFragment)
+//                .commit();
     }
 
     private void setupRecipeStepDetailsfragment() {

@@ -27,17 +27,20 @@ public class RecipeModel implements Parcelable{
     private String name;
 
     @SerializedName("ingredients")
-    private List<IngredientModel> ingredients = null;
-    @SerializedName("steps")
+    private List<IngredientModel> ingredients;
 
-    private List<StepModel> steps = null;
+    @SerializedName("steps")
+    private List<StepModel> steps;
 
     @SerializedName("servings")
     private int servings;
 
+
     protected RecipeModel(Parcel in) {
         id = in.readInt();
         name = in.readString();
+        ingredients = in.createTypedArrayList(IngredientModel.CREATOR);
+        steps = in.createTypedArrayList(StepModel.CREATOR);
         servings = in.readInt();
     }
 
@@ -102,6 +105,8 @@ public class RecipeModel implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(name);
+        dest.writeTypedList(ingredients);
+        dest.writeTypedList(steps);
         dest.writeInt(servings);
     }
 
