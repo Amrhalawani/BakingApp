@@ -52,6 +52,7 @@ public class RecipeDetailFragment extends Fragment {
             Toast.makeText(getActivity(), "get intent", Toast.LENGTH_SHORT).show();
 
         } else {
+            
             Toast.makeText(getActivity(), "we deosent get intent", Toast.LENGTH_SHORT).show();
         }
 
