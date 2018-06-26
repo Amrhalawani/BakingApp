@@ -52,7 +52,7 @@ public class RecipeDetailFragment extends Fragment {
             Toast.makeText(getActivity(), "get intent", Toast.LENGTH_SHORT).show();
 
         } else {
-            
+
             Toast.makeText(getActivity(), "we deosent get intent", Toast.LENGTH_SHORT).show();
         }
 
@@ -67,6 +67,12 @@ public class RecipeDetailFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerAdaptor.updateData(stepModelList);
         recyclerView.setAdapter(recyclerAdaptor);
+        recyclerAdaptor.setOnItemClickListener(new StepsRecyclerAdaptor.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(getActivity(), "pos"+position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setupingredientListtoString(List<IngredientModel> ingredientList) {
