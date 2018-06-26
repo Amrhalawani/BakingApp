@@ -74,11 +74,11 @@ public class RecipeDetailFragment extends Fragment {
             String a = "\u273B " + ingredientList.get(j).getIngredient()
                     + " (" + ingredientList.get(j).getQuantity().toString()
                     + " " + ingredientList.get(j).getMeasure() + ").\n";
+
             stringBuilder.append(a);
         }
         String finalString = stringBuilder.toString();
         textView.setText(finalString);
     }
-
 }
 
