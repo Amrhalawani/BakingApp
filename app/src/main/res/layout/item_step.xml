@@ -10,15 +10,15 @@
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="5dp"
         card_view:cardBackgroundColor="@color/colorPrimary"
-        card_view:cardElevation="20dp"
+        card_view:cardElevation="5dp"
+        android:layout_margin="5dp"
         >
 
         <TextView
             android:id="@+id/item_step_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="1dp"
-            android:layout_marginStart="1dp"
+            android:layout_margin="3dp"
             android:text="step Name"
             android:textColor="#ffffff"
             android:textSize="20sp" />

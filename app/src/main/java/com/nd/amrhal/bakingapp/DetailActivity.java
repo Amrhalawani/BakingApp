@@ -54,19 +54,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setupRecipeDetailsFragment() {
 
-        Fragment recipeDetailFragment = getFragmentManager().findFragmentById(R.id.FragmentDetail);
-
-
+//       RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
 //        Bundle bundle = new Bundle();
-//        arrayList = recipeModel.getIngredients();
-////      bundle.putParcelableArrayList("ingredients", (ArrayList<? extends Parcelable>) arrayList);
-//        bundle.putParcelableArrayList(INGREDIANT_LIST_KEY, (ArrayList<? extends Parcelable>) recipeModel.getIngredients());
-//
-//        recipeDetailFragment.setArguments(bundle);
 //        fragmentManager = getSupportFragmentManager();
 //        fragmentManager.beginTransaction()
-//                .add(R.id.FragmentDetail, recipeDetailFragment)
-//                .commit();
+//               .add(R.id.FragmentDetail,recipeDetailFragment).commit();
     }
 
     private void setupRecipeStepDetailsfragment() {

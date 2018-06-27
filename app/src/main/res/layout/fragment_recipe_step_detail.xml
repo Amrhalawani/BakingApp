@@ -5,13 +5,15 @@
     android:layout_height="match_parent"
     tools:context=".RecipeStepDetailFragment"
     android:background="#fc002b71"
-    android:alpha="0.3">
+    android:alpha="0.8"
+    android:id="@+id/framelayout_StepsFragment"
+   >
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"
+        android:textSize="70sp"
         android:textColor="#fff"/>
 
 </FrameLayout>

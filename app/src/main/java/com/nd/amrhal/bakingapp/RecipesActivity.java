@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -31,12 +32,12 @@ public class RecipesActivity extends AppCompatActivity {
     //http://www.jsonschema2pojo.org/
 
     final static String RECIPE_PARC_KEY = "recipemodel";
- final static String INGREDIANT_PARC_KEY = "ingrediantmodel";
+    final static String INGREDIANT_PARC_KEY = "ingrediantmodel";
+// SwipeRefreshLayout mPullToRefresh = findViewById(R.id.swiperefresh_recipesactivity);
 
     Context context;
 
     String url = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-    TextView textView;
     //    Icon made by Freepik from www.flaticon.com
     private LiveDateVM mLiveDate;
 
@@ -45,7 +46,7 @@ public class RecipesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
 
-        textView = findViewById(R.id.textview);
+
         final RecyclerView recyclerView = findViewById(R.id.recycler_view);
 //        recyclerView.setSaveEnabled(true);
         final RecipesRecyclerAdaptor recyclerAdaptor = new RecipesRecyclerAdaptor(RecipesActivity.this);
@@ -59,7 +60,6 @@ public class RecipesActivity extends AppCompatActivity {
         Observer<List<RecipeModel>> nameObserver = new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable final List<RecipeModel> recipeModels) {
-                textView.setText("List size: " + recipeModels.size());
                 recyclerAdaptor.updateData(recipeModels);
                 recyclerView.setAdapter(recyclerAdaptor);
                 recyclerAdaptor.setOnItemClickListener(new RecipesRecyclerAdaptor.OnItemClickListener() {
@@ -84,6 +84,12 @@ public class RecipesActivity extends AppCompatActivity {
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         mLiveDate.getCurrentName().observe(this, nameObserver);
 
+//        mPullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                Toast.makeText(RecipesActivity.this, "on refresh", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
@@ -97,6 +103,7 @@ public class RecipesActivity extends AppCompatActivity {
         if (nColumns < 2) return 1; //to keep the grid aspect
         return nColumns;
     }
+
 
 }
 

@@ -1,8 +1,10 @@
 package com.nd.amrhal.bakingapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 
 import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
 import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
-import com.nd.amrhal.bakingapp.Recipes.RecipesRecyclerAdaptor;
+
 import com.nd.amrhal.bakingapp.Step.StepModel;
 
 import java.util.ArrayList;
@@ -46,14 +48,14 @@ public class RecipeDetailFragment extends Fragment {
 
             recipeModel = getActivity().getIntent().getExtras().getParcelable(RecipesActivity.RECIPE_PARC_KEY);
             ingredientModelList = recipeModel.getIngredients();
-            stepModelList= recipeModel.getSteps();
+            stepModelList = recipeModel.getSteps();
             setupingredientListtoString(ingredientModelList);
-            recyclerview(view,stepModelList);
+            recyclerview(view, stepModelList);
             Toast.makeText(getActivity(), "get intent", Toast.LENGTH_SHORT).show();
 
         } else {
 
-            Toast.makeText(getActivity(), "we deosent get intent", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "we deosnt get intent", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -62,15 +64,27 @@ public class RecipeDetailFragment extends Fragment {
 
     private void recyclerview(View view, List<StepModel> stepModelList) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_steps);
-         StepsRecyclerAdaptor recyclerAdaptor = new StepsRecyclerAdaptor(getActivity());
+        StepsRecyclerAdaptor recyclerAdaptor = new StepsRecyclerAdaptor(getActivity());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerAdaptor.updateData(stepModelList);
         recyclerView.setAdapter(recyclerAdaptor);
         recyclerAdaptor.setOnItemClickListener(new StepsRecyclerAdaptor.OnItemClickListener() {
+            @SuppressLint("ResourceType")
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(), "pos"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "pos" + position, Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putInt("pos", position);
+
+                RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
+                // recipeDetailStepFragment.setArguments(bundle);
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                fm.beginTransaction()
+                        .add(R.id.FragmentDetail, recipeDetailStepFragment)
+                        .commit();
+
+
             }
         });
     }
@@ -81,7 +95,6 @@ public class RecipeDetailFragment extends Fragment {
             String a = "\u273B " + ingredientList.get(j).getIngredient()
                     + " (" + ingredientList.get(j).getQuantity().toString()
                     + " " + ingredientList.get(j).getMeasure() + ").\n";
-
             stringBuilder.append(a);
         }
         String finalString = stringBuilder.toString();
