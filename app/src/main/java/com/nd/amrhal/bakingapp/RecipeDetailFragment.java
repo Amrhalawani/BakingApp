@@ -1,10 +1,11 @@
 package com.nd.amrhal.bakingapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,8 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
-import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 
+import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 import com.nd.amrhal.bakingapp.Step.StepModel;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class RecipeDetailFragment extends Fragment {
     List<StepModel> stepModelList = new ArrayList<>();
 
     RecipeModel recipeModel;
+    Communication communication;
 
     public RecipeDetailFragment() {
         // Required empty public constructor
@@ -62,6 +64,15 @@ public class RecipeDetailFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        communication = (Communication) activity;
+
+        communication.respond("from detail frag POS=");
+    }
+
+
     private void recyclerview(View view, List<StepModel> stepModelList) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_steps);
         StepsRecyclerAdaptor recyclerAdaptor = new StepsRecyclerAdaptor(getActivity());
@@ -79,8 +90,10 @@ public class RecipeDetailFragment extends Fragment {
 
                 RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
                 // recipeDetailStepFragment.setArguments(bundle);
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-                fm.beginTransaction()
+
+
+
+                getActivity().getSupportFragmentManager().beginTransaction()
                         .add(R.id.FragmentDetail, recipeDetailStepFragment)
                         .commit();
 

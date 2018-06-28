@@ -1,7 +1,6 @@
 package com.nd.amrhal.bakingapp;
 
 import android.app.Fragment;
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +10,9 @@ import android.widget.Toast;
 import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
 import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements Communication {
 
     final static String INGREDIANT_LIST_KEY = "ingrediantlist";
 
@@ -25,6 +23,7 @@ public class DetailActivity extends AppCompatActivity {
     boolean mTwopane = false;
 
     FragmentManager fragmentManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +61,20 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setupRecipeStepDetailsfragment() {
-        RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.FragmentStepDetail, recipeDetailStepFragment)
-                .commit();
+//        RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .add(R.id.FragmentStepDetail, recipeDetailStepFragment)
+//                .commit();
     }
 
+    //*********************************************************
+    @Override
+    public void respond(String data) {
+
+        RecipeStepDetailFragment f = (RecipeStepDetailFragment) getSupportFragmentManager().findFragmentById(R.id.FragmentStepDetail);
+        f.changeDate(data);
+
+    }
+    //*********************************************************
 }

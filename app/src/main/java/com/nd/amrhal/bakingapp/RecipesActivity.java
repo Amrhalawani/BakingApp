@@ -4,25 +4,19 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
 import com.nd.amrhal.bakingapp.Recipes.LiveDateVM;
 import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 import com.nd.amrhal.bakingapp.Recipes.RecipesRecyclerAdaptor;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 

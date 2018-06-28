@@ -2,18 +2,10 @@ package com.nd.amrhal.bakingapp.Recipes;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.content.Context;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 
-import com.nd.amrhal.bakingapp.RecipesActivity;
-
-import java.io.IOException;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

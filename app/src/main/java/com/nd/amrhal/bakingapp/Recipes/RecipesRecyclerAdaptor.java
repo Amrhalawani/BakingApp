@@ -2,7 +2,6 @@ package com.nd.amrhal.bakingapp.Recipes;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -13,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nd.amrhal.bakingapp.DetailActivity;
 import com.nd.amrhal.bakingapp.R;
-import com.nd.amrhal.bakingapp.RecipesActivity;
 
 import net.wujingchao.android.view.SimpleTagImageView;
 
