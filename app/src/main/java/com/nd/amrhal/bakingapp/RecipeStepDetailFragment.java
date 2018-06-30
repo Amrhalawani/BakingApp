@@ -30,8 +30,5 @@ public class RecipeStepDetailFragment extends Fragment {
         return view;
     }
 
-    public void changeDate(String data) {
-        textView.setText(data);
-    }
 
 }

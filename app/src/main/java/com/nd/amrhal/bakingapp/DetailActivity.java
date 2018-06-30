@@ -12,7 +12,7 @@ import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 
 import java.util.List;
 
-public class DetailActivity extends AppCompatActivity implements Communication {
+public class DetailActivity extends AppCompatActivity {
 
     final static String INGREDIANT_LIST_KEY = "ingrediantlist";
 
@@ -68,14 +68,4 @@ public class DetailActivity extends AppCompatActivity implements Communication {
 //                .commit();
     }
 
-    //*********************************************************
-    @Override
-    public void respond(String data) {
-
-        RecipeStepDetailFragment f = (RecipeStepDetailFragment) getSupportFragmentManager().findFragmentById(R.id.FragmentStepDetail);
-       // setupRecipeStepDetailsfragment();
-        recipeDetailStepFragment.changeDate(data);
-
-    }
-    //*********************************************************
 }

@@ -30,7 +30,6 @@ public class RecipeDetailFragment extends Fragment {
     List<StepModel> stepModelList = new ArrayList<>();
 
     RecipeModel recipeModel;
-    Communication communication;
 
     public RecipeDetailFragment() {
         // Required empty public constructor
@@ -64,19 +63,7 @@ public class RecipeDetailFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
- //       communication = (Communication) activity;
 
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        communication = (Communication) context;
-    }
 
     private void recyclerview(View view, List<StepModel> stepModelList) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_steps);
@@ -100,7 +87,6 @@ public class RecipeDetailFragment extends Fragment {
 //                        .add(R.id.FragmentDetail, recipeDetailStepFragment)
 //                        .commit();
 
-                communication.respond("from detail frag POS=");
             }
         });
     }
