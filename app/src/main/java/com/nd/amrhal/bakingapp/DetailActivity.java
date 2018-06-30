@@ -23,7 +23,7 @@ public class DetailActivity extends AppCompatActivity implements Communication {
     boolean mTwopane = false;
 
     FragmentManager fragmentManager;
-
+    RecipeStepDetailFragment recipeDetailStepFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +61,7 @@ public class DetailActivity extends AppCompatActivity implements Communication {
     }
 
     private void setupRecipeStepDetailsfragment() {
-//        RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
+        //recipeDetailStepFragment = new RecipeStepDetailFragment();
 //        getSupportFragmentManager()
 //                .beginTransaction()
 //                .add(R.id.FragmentStepDetail, recipeDetailStepFragment)
@@ -73,7 +73,8 @@ public class DetailActivity extends AppCompatActivity implements Communication {
     public void respond(String data) {
 
         RecipeStepDetailFragment f = (RecipeStepDetailFragment) getSupportFragmentManager().findFragmentById(R.id.FragmentStepDetail);
-        f.changeDate(data);
+       // setupRecipeStepDetailsfragment();
+        recipeDetailStepFragment.changeDate(data);
 
     }
     //*********************************************************

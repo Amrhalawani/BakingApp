@@ -67,11 +67,16 @@ public class RecipeDetailFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        communication = (Communication) activity;
+ //       communication = (Communication) activity;
 
-        communication.respond("from detail frag POS=");
+
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        communication = (Communication) context;
+    }
 
     private void recyclerview(View view, List<StepModel> stepModelList) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_steps);
@@ -88,16 +93,14 @@ public class RecipeDetailFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt("pos", position);
 
-                RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
-                // recipeDetailStepFragment.setArguments(bundle);
+//                RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
+//                // recipeDetailStepFragment.setArguments(bundle);
+//
+//                getActivity().getSupportFragmentManager().beginTransaction()
+//                        .add(R.id.FragmentDetail, recipeDetailStepFragment)
+//                        .commit();
 
-
-
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.FragmentDetail, recipeDetailStepFragment)
-                        .commit();
-
-
+                communication.respond("from detail frag POS=");
             }
         });
     }
