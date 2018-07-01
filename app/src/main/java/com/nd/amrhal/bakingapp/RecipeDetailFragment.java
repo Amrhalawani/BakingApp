@@ -1,7 +1,6 @@
 package com.nd.amrhal.bakingapp;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -31,17 +30,32 @@ public class RecipeDetailFragment extends Fragment {
 
     RecipeModel recipeModel;
 
+    SendMessage SM;
+
     public RecipeDetailFragment() {
         // Required empty public constructor
     }
 
+    interface SendMessage {
+        void sendData(String message);
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            SM = (SendMessage) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Error in retrieving data. Please try again");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
         textView = view.findViewById(R.id.ingredientTV);
 
@@ -64,7 +78,6 @@ public class RecipeDetailFragment extends Fragment {
     }
 
 
-
     private void recyclerview(View view, List<StepModel> stepModelList) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_steps);
         StepsRecyclerAdaptor recyclerAdaptor = new StepsRecyclerAdaptor(getActivity());
@@ -72,20 +85,24 @@ public class RecipeDetailFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerAdaptor.updateData(stepModelList);
         recyclerView.setAdapter(recyclerAdaptor);
+
         recyclerAdaptor.setOnItemClickListener(new StepsRecyclerAdaptor.OnItemClickListener() {
             @SuppressLint("ResourceType")
             @Override
             public void onItemClick(int position) {
-                Toast.makeText(getActivity(), "pos" + position, Toast.LENGTH_SHORT).show();
+
                 Bundle bundle = new Bundle();
                 bundle.putInt("pos", position);
 
-//                RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
-//                // recipeDetailStepFragment.setArguments(bundle);
-//
-//                getActivity().getSupportFragmentManager().beginTransaction()
-//                        .add(R.id.FragmentDetail, recipeDetailStepFragment)
-//                        .commit();
+                RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
+                recipeDetailStepFragment.setArguments(bundle);
+
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .add(R.id.FragmentDetail, recipeDetailStepFragment)
+                        .commit();
+
+                SM.sendData(" from fragment one we send " + position );
 
             }
         });
@@ -94,7 +111,7 @@ public class RecipeDetailFragment extends Fragment {
     private void setupingredientListtoString(List<IngredientModel> ingredientList) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int j = 0; j < ingredientList.size(); j++) {
-            String a = "\u273B " + ingredientList.get(j).getIngredient()
+            String a = " \u273B " + ingredientList.get(j).getIngredient()
                     + " (" + ingredientList.get(j).getQuantity().toString()
                     + " " + ingredientList.get(j).getMeasure() + ").\n";
             stringBuilder.append(a);

@@ -2,11 +2,13 @@ package com.nd.amrhal.bakingapp;
 
 
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -27,8 +29,17 @@ public class RecipeStepDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_step_detail, container, false);
         textView = view.findViewById(R.id.textview_StepDetailFragment);
 
-        return view;
-    }
 
+            String asd = String.valueOf(getArguments() != null ? getArguments().getInt("pos") : 0);
+            Toast.makeText(getActivity(), "from Step f pos= " + asd, Toast.LENGTH_SHORT).show();
+
+            return view;
+        }
+
+
+    protected void displayReceivedData(String message)
+    {
+        textView.setText("Data received: "+message);
+    }
 
 }

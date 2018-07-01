@@ -9,6 +9,7 @@
         android:id="@+id/FragmentDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.nd.amrhal.bakingapp.RecipeDetailFragment"/>
+        android:tag="fragment_tag_fragmentDetail"
+        android:name="com.nd.amrhal.bakingapp.RecipeDetailFragment" />
 
 </android.support.constraint.ConstraintLayout>

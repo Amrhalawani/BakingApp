@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
@@ -12,7 +13,7 @@ import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 
 import java.util.List;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements RecipeDetailFragment.SendMessage{
 
     final static String INGREDIANT_LIST_KEY = "ingrediantlist";
 
@@ -65,7 +66,17 @@ public class DetailActivity extends AppCompatActivity {
 //        getSupportFragmentManager()
 //                .beginTransaction()
 //                .add(R.id.FragmentStepDetail, recipeDetailStepFragment)
-//                .commit();
+//                .commit()
+
+
     }
 
+    @Override
+    public void sendData(String message) {
+
+        RecipeStepDetailFragment f = (RecipeStepDetailFragment) getSupportFragmentManager().findFragmentByTag("fragment_tag_fragmentStepDetail");
+        f.displayReceivedData(message);
+
+
+    }
 }
