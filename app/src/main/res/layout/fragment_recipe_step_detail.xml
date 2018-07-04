@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/framelayout_StepsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecipeStepDetailFragment"
-    android:background="#fc002b71"
-    android:alpha="0.8"
-    android:id="@+id/framelayout_StepsFragment"
-   >
+    android:alpha="0.5"
 
-    <TextView
-        android:id="@+id/textview_StepDetailFragment"
+    tools:context=".RecipeStepDetailFragment">
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        android:textSize="70sp"
-        android:textColor="#fff"/>
+        android:layout_height="match_parent">
+
+        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+            android:id="@+id/exo_player_view"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+
+
+        <TextView
+            android:id="@+id/textview_StepDetailFragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/hello_blank_fragment"
+            android:textColor="#a65151"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exo_player_view" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </FrameLayout>

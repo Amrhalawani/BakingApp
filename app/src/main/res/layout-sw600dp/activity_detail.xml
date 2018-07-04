@@ -9,22 +9,22 @@
     <fragment
         android:id="@+id/FragmentDetail"
         android:name="com.nd.amrhal.bakingapp.RecipeDetailFragment"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:tag="fragment_tag_fragmentDetail"
-        android:layout_weight="1"
+        android:layout_weight="2"
         />
 
     <LinearLayout
         android:id="@+id/linearLayoutforStepfragment"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
         <fragment
             android:id="@+id/FragmentStepDetail"
             android:name="com.nd.amrhal.bakingapp.RecipeStepDetailFragment"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:tag="fragment_tag_fragmentStepDetail"
              />

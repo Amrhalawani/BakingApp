@@ -39,6 +39,7 @@ public class RecipeDetailFragment extends Fragment {
     interface SendMessage {
         void sendData(String message);
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -70,7 +71,7 @@ public class RecipeDetailFragment extends Fragment {
 
         } else {
 
-            Toast.makeText(getActivity(), "we deosnt get intent", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "we doest get intent", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -90,17 +91,6 @@ public class RecipeDetailFragment extends Fragment {
             @SuppressLint("ResourceType")
             @Override
             public void onItemClick(int position) {
-
-                Bundle bundle = new Bundle();
-                bundle.putInt("pos", position);
-
-                RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
-                recipeDetailStepFragment.setArguments(bundle);
-
-
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .add(R.id.FragmentDetail, recipeDetailStepFragment)
-                        .commit();
 
                 SM.sendData(" from fragment one we send " + position );
 

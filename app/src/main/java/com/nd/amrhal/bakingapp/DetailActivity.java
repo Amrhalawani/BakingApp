@@ -12,10 +12,7 @@ import android.widget.Toast;
 import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
 import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
 
-
 import java.util.List;
-
-import com.nd.amrhal.bakingapp.Keys;
 
 public class DetailActivity extends AppCompatActivity implements RecipeDetailFragment.SendMessage {
 
@@ -42,12 +39,13 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        getSharedPreferences(Keys.TWO_PANE_SHAREDP, MODE_PRIVATE).edit().putInt(Keys.TWO_PANE_PHONE_OR_TABLET, Keys.PHONE).apply();
         recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
 
         if (findViewById(R.id.linearLayoutforStepfragment) != null) {
             mTwopane = true;
-            getSharedPreferences(Keys.TWO_PANE_SHAREDP, MODE_PRIVATE).edit().putInt(Keys.TWO_PANE_PHONE_OR_TABLET, Keys.TABLET).apply();
+
+
+            Util.setPhoneOrTablet(DetailActivity.this,Util.TABLET);
             if (savedInstanceState == null) {
                 setupRecipeDetailsFragment();
                 setupRecipeStepDetailsfragment();
@@ -55,7 +53,7 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
             }
         } else {
             mTwopane = false;
-            getSharedPreferences(Keys.TWO_PANE_SHAREDP, MODE_PRIVATE).edit().putInt(Keys.TWO_PANE_PHONE_OR_TABLET, Keys.PHONE).apply();
+            Util.setPhoneOrTablet(DetailActivity.this,Util.PHONE);
 
             if (savedInstanceState == null) {
                 setupRecipeDetailsFragment();
@@ -63,21 +61,10 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
 
         }
 
-        int check_phone_or_tablet = getSharedPreferences(Keys.TWO_PANE_SHAREDP, MODE_PRIVATE).getInt(Keys.TWO_PANE_PHONE_OR_TABLET, -1);
-
-        Toast.makeText(this,  checkPhoneOrTablet(check_phone_or_tablet) , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "phone or tablet"+Util.getPhoneOrTablet(DetailActivity.this), Toast.LENGTH_SHORT).show();
 
     }
 
-    private String checkPhoneOrTablet(int i) {
-        String result = "not specifec Phone or Tablet";
-        if (i == Keys.PHONE) {
-            result = "it's a Phone";
-        } else if (i == Keys.TABLET) {
-            result = "it's a Tablet";
-        }
-        return result;
-    }
 
     private void setupRecipeDetailsFragment() {
 
