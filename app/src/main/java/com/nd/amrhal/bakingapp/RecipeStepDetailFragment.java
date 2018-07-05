@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -33,10 +34,12 @@ public class RecipeStepDetailFragment extends Fragment {
 
     SimpleExoPlayerView exoPlayerView;
     SimpleExoPlayer exoPlayer;
+    private int position;
+    private static long PositionPlayer= C.TIME_UNSET;
 
-    String videoURL = "http://blueappsoftware.in/layout_design_android_blog.mp4";
+   String videoURL = "http://blueappsoftware.in/layout_design_android_blog.mp4";
 
-    //String videoURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffdb1d_2-form-crust-to-bottom-of-pan-cheesecake/2-form-crust-to-bottom-of-pan-cheesecake.mp4";
+   // String videoURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffdb1d_2-form-crust-to-bottom-of-pan-cheesecake/2-form-crust-to-bottom-of-pan-cheesecake.mp4";
 
 
     TextView textView;
@@ -52,18 +55,16 @@ public class RecipeStepDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_recipe_step_detail, container, false);
         textView = view.findViewById(R.id.textview_StepDetailFragment);
-        exoPlayerView = view.findViewById(R.id.exo_player_view);
 
-        exoMediaSetup();
-        String asd = String.valueOf(getArguments() != null ? getArguments().getInt("pos") : 0);
-        Toast.makeText(getActivity(), "from Step f pos= " + asd, Toast.LENGTH_SHORT).show();
+        exoMediaSetup(view);
 
         return view;
     }
 
-    private void exoMediaSetup() {
+    private void exoMediaSetup(View rootView) {
 
         try {
+            exoPlayerView = rootView.findViewById(R.id.exo_player_view);
 
             BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
             TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));

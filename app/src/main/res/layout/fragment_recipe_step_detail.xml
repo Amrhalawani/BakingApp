@@ -5,10 +5,9 @@
     android:id="@+id/framelayout_StepsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="0.5"
 
     tools:context=".RecipeStepDetailFragment">
-
+    <!--dont use alpha in your layout when using exoplayer-->
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
