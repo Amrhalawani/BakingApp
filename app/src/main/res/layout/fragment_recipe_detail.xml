@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RecipeDetailFragment"
     android:background="@color/colorAccent"
-    android:alpha="0.9"
     android:id="@+id/framelayout_recipeDetailFragment"
     >
 

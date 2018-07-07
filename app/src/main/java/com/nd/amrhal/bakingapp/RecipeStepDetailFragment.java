@@ -37,9 +37,9 @@ public class RecipeStepDetailFragment extends Fragment {
     private int position;
     private static long PositionPlayer= C.TIME_UNSET;
 
-   String videoURL = "http://blueappsoftware.in/layout_design_android_blog.mp4";
+   //String videoURL = "http://blueappsoftware.in/layout_design_android_blog.mp4";
 
-   // String videoURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffdb1d_2-form-crust-to-bottom-of-pan-cheesecake/2-form-crust-to-bottom-of-pan-cheesecake.mp4";
+    String videoURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd9cb_4-press-crumbs-in-pie-plate-creampie/4-press-crumbs-in-pie-plate-creampie.mp4";
 
 
     TextView textView;
