@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.nd.amrhal.bakingapp"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -63,13 +63,12 @@ dependencies {
 
     implementation 'net.wujingchao.android.view:simple-tag-imageview:1.0.1'
 
-
     // exo player
-    implementation 'com.google.android.exoplayer:exoplayer:r2.4.0'
-    implementation 'com.google.android.exoplayer:exoplayer-core:r2.4.0'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:r2.4.0'
-    implementation 'com.google.android.exoplayer:exoplayer-hls:r2.4.0'
-    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:r2.4.0'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:r2.4.0'
+    implementation 'com.google.android.exoplayer:exoplayer:2.8.0'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.8.0'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.8.0'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.8.0'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.8.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.8.0'
 
 }

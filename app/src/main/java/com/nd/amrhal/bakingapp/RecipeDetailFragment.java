@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,7 +57,7 @@ public class RecipeDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-         View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
         textView = view.findViewById(R.id.ingredientTV);
 
@@ -73,7 +74,6 @@ public class RecipeDetailFragment extends Fragment {
 
             Toast.makeText(getActivity(), "we doest get intent", Toast.LENGTH_SHORT).show();
         }
-
 
         return view;
     }
@@ -92,8 +92,20 @@ public class RecipeDetailFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
 
-                SM.sendData(" from fragment one we send " + position );
+                if (Util.getPhoneOrTablet(getActivity()) == Util.TABLET) {
+                    SM.sendData(" from fragment one we send " + position);
+                }
 
+
+                if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
+
+                    Toast.makeText(getActivity(), "it's phone from detail fragment start new step fragment", Toast.LENGTH_SHORT).show();
+                    RecipeStepDetailFragment stepDetailFragment = new RecipeStepDetailFragment();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .add(R.id.FragmentDetail, stepDetailFragment)
+                            .commit();
+                }
             }
         });
     }
