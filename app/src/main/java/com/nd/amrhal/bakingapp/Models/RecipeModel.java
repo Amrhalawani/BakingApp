@@ -1,11 +1,9 @@
-package com.nd.amrhal.bakingapp.Recipes;
+package com.nd.amrhal.bakingapp.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
-import com.nd.amrhal.bakingapp.Step.StepModel;
 
 import java.util.List;
 

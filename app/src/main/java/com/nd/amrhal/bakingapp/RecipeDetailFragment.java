@@ -2,10 +2,10 @@ package com.nd.amrhal.bakingapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,16 +14,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
+import com.nd.amrhal.bakingapp.Models.IngredientModel;
 
-import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
-import com.nd.amrhal.bakingapp.Step.StepModel;
+import com.nd.amrhal.bakingapp.Models.RecipeModel;
+import com.nd.amrhal.bakingapp.Models.StepModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class RecipeDetailFragment extends Fragment {
+    public static final String STEP_RECIPE_PARC_KEY = "stepparclable";
     TextView textView;
     String test = "";
     List<IngredientModel> ingredientModelList = new ArrayList<>();
@@ -79,7 +80,7 @@ public class RecipeDetailFragment extends Fragment {
     }
 
 
-    private void recyclerview(View view, List<StepModel> stepModelList) {
+    private void recyclerview(View view, final List<StepModel> stepModelList) {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_steps);
         StepsRecyclerAdaptor recyclerAdaptor = new StepsRecyclerAdaptor(getActivity());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
@@ -91,20 +92,26 @@ public class RecipeDetailFragment extends Fragment {
             @SuppressLint("ResourceType")
             @Override
             public void onItemClick(int position) {
-
+                //tablet
                 if (Util.getPhoneOrTablet(getActivity()) == Util.TABLET) {
                     SM.sendData(" from fragment one we send " + position);
                 }
 
-
-                if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
+                //phone
+                else if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
 
                     Toast.makeText(getActivity(), "it's phone from detail fragment start new step fragment", Toast.LENGTH_SHORT).show();
-                    RecipeStepDetailFragment stepDetailFragment = new RecipeStepDetailFragment();
-                    getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .add(R.id.FragmentDetail, stepDetailFragment)
-                            .commit();
+                    Intent i = new Intent(getActivity(), StepActivity.class);
+                    StepModel stepModel = stepModelList.get(position);
+                    i.putExtra(STEP_RECIPE_PARC_KEY, stepModel); //Parcelable
+                    startActivity(i);
+
+//
+//                    RecipeStepDetailFragment stepDetailFragment = new RecipeStepDetailFragment();
+//                    getActivity().getSupportFragmentManager()
+//                            .beginTransaction()
+//                            .add(R.id.FragmentDetail, stepDetailFragment)
+//                            .commit();
                 }
             }
         });

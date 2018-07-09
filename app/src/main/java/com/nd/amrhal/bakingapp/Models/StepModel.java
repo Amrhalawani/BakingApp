@@ -1,4 +1,4 @@
-package com.nd.amrhal.bakingapp.Step;
+package com.nd.amrhal.bakingapp.Models;
 
 
 import android.os.Parcel;

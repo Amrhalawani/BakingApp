@@ -1,4 +1,4 @@
-package com.nd.amrhal.bakingapp.Ingredient;
+package com.nd.amrhal.bakingapp.Models;
 
 
 

@@ -4,6 +4,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
+import com.nd.amrhal.bakingapp.Models.RecipeModel;
+
 import java.util.List;
 
 import retrofit2.Call;

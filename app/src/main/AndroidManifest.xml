@@ -25,7 +25,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".DetailActivity" />
-        <activity android:name=".StepDetailActivity"></activity>
+        <activity android:name=".StepActivity" />
     </application>
 
 </manifest>

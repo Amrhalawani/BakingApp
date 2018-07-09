@@ -2,41 +2,66 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:id="@+id/framelayout_StepsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".RecipeStepDetailFragment">
     <!--dont use alpha in your layout when using exoplayer-->
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.exoplayer2.ui.SimpleExoPlayerView
             android:id="@+id/exo_player_view"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="#0b0b0b"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
 
+        <ImageView
+            android:id="@+id/placeholder_of_player"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:src="@drawable/glovhand"
+            android:scaleType="centerCrop"
+            android:background="#fafafa"
+            android:visibility="gone"
+            />
 
-        <TextView
-            android:id="@+id/textview_StepDetailFragment"
-            android:layout_width="wrap_content"
+
+
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/hello_blank_fragment"
-            android:textColor="#a65151"
-            android:textSize="20sp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/exo_player_view" />
+            app:layout_constraintTop_toBottomOf="@+id/exo_player_view"
+            >
+            <TextView
+                android:id="@+id/textview_StepDetailFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hello_blank_fragment"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:gravity="start"
+               />
+
+        </ScrollView>
+
+
 
 
     </android.support.constraint.ConstraintLayout>

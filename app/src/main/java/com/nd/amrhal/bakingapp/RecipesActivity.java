@@ -12,10 +12,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.nd.amrhal.bakingapp.IdlingResource.SimpleIdlingResource;
 import com.nd.amrhal.bakingapp.Recipes.LiveDateVM;
-import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
+import com.nd.amrhal.bakingapp.Models.RecipeModel;
 import com.nd.amrhal.bakingapp.Recipes.RecipesRecyclerAdaptor;
 
 
@@ -105,14 +106,18 @@ public class RecipesActivity extends AppCompatActivity {
     public int numberOfColumns() {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        // You can change this divider to adjust the size of the poster
-        int widthDivider = 600;
+
         int width = displayMetrics.widthPixels;
+        // You can change this divider to adjust the size of the poster
+        int widthDivider = 550;
+        if (width < 1079 && width > 1000) {
+            widthDivider= 500;
+        }
+        Toast.makeText(this, "width of this mobile is " + width, Toast.LENGTH_LONG).show();
         int nColumns = width / widthDivider;
         if (nColumns < 2) return 1; //to keep the grid aspect
         return nColumns;
     }
-
 
 
 }

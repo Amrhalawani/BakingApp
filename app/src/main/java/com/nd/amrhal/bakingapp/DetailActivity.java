@@ -7,16 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.nd.amrhal.bakingapp.Ingredient.IngredientModel;
-import com.nd.amrhal.bakingapp.Recipes.RecipeModel;
+import com.nd.amrhal.bakingapp.Models.IngredientModel;
+import com.nd.amrhal.bakingapp.Models.RecipeModel;
 
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity implements RecipeDetailFragment.SendMessage {
 
     final static String INGREDIANT_LIST_KEY = "ingrediantlist";
+
 
     RecipeModel recipeModel;
 
@@ -40,12 +42,20 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(recipeModel.getName());
+            getSupportActionBar().setElevation(20);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.cupcake40);
+
+        }
 
         if (findViewById(R.id.linearLayoutforStepfragment) != null) {
             mTwopane = true;
 
 
-            Util.setPhoneOrTablet(DetailActivity.this,Util.TABLET);
+            Util.setPhoneOrTablet(DetailActivity.this, Util.TABLET);
             if (savedInstanceState == null) {
                 setupRecipeDetailsFragment();
                 setupRecipeStepDetailsfragment();
@@ -53,7 +63,7 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
             }
         } else {
             mTwopane = false;
-            Util.setPhoneOrTablet(DetailActivity.this,Util.PHONE);
+            Util.setPhoneOrTablet(DetailActivity.this, Util.PHONE);
 
             if (savedInstanceState == null) {
                 setupRecipeDetailsFragment();
@@ -61,10 +71,17 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
 
         }
 
-        Toast.makeText(this, "phone or tablet"+Util.getPhoneOrTablet(DetailActivity.this), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "phone or tablet" + Util.getPhoneOrTablet(DetailActivity.this), Toast.LENGTH_SHORT).show();
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void setupRecipeDetailsFragment() {
 

@@ -4,6 +4,8 @@ package com.nd.amrhal.bakingapp;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.nd.amrhal.bakingapp.Models.StepModel;
 
 
 /**
@@ -61,8 +64,12 @@ public class RecipeStepDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_recipe_step_detail, container, false);
         textView = view.findViewById(R.id.textview_StepDetailFragment);
+//
+//        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show();
 
-        exoMediaSetup(view, savedInstanceState,container);
+
+        exoMediaSetup(view, savedInstanceState, container);
 
         return view;
     }
@@ -101,6 +108,27 @@ public class RecipeStepDetailFragment extends Fragment {
     private void exoMediaSetup(View rootView, Bundle savedInstanceState, ViewGroup container) {
 
         try {
+
+
+            //tablet
+            if (Util.getPhoneOrTablet(getActivity()) == Util.TABLET) {
+
+            }
+            //phone
+            else if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
+                StepModel stepModel = getActivity().getIntent().getExtras().getParcelable(RecipeDetailFragment.STEP_RECIPE_PARC_KEY);
+                textView.setText(stepModel.getDescription());
+                String s = stepModel.getVideoURL();
+                String a = s.substring(s.length() - 3, s.length());
+                if (a.equals("mp4")) {
+                    Toast.makeText(getActivity(), "mp4==mp4", Toast.LENGTH_SHORT).show();
+                    videoURL = stepModel.getVideoURL();
+                }
+
+                Log.e("TAG", "exoMediaSetup: " + s.subSequence(s.length() - 3, s.length()));
+
+            }
+
             exoPlayerView = rootView.findViewById(R.id.exo_player_view);
 
             BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
@@ -126,8 +154,9 @@ public class RecipeStepDetailFragment extends Fragment {
                 container.removeAllViews();
             }
 
+
         } catch (Exception e) {
-            Log.e("MainAcvtivity", " exoplayer error " + e.toString());
+            Log.e("tag", " exoplayer error " + e.toString());
         }
     }
 

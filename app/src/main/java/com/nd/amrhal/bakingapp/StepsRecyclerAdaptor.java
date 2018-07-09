@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.nd.amrhal.bakingapp.Step.StepModel;
+import com.nd.amrhal.bakingapp.Models.StepModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class StepsRecyclerAdaptor extends RecyclerView.Adapter<StepsRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull myViewholder holder, final int position) {
         StepModel SModel = list.get(position);
-        holder.step.setText(SModel.getShortDescription());
+        holder.step.setText(position + "-" + " " + SModel.getShortDescription());
     }
 
     @Override

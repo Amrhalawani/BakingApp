@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.nd.amrhal.bakingapp.Models.RecipeModel;
 import com.nd.amrhal.bakingapp.R;
 
 import net.wujingchao.android.view.SimpleTagImageView;
