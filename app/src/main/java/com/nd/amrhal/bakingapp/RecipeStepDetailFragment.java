@@ -44,9 +44,8 @@ public class RecipeStepDetailFragment extends Fragment {
     //String videoURL = "http://blueappsoftware.in/layout_design_android_blog.mp4";
     String videoURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd9cb_4-press-crumbs-in-pie-plate-creampie/4-press-crumbs-in-pie-plate-creampie.mp4";
     private ImageView placeholder;
-    private ImageView playButton;
-    @SuppressWarnings("deprecation")
     SimpleExoPlayerView exoPlayerView;
+    ImageView playerPlaceholder;
 
     private static long playerPosition = C.TIME_UNSET;
 
@@ -64,9 +63,10 @@ public class RecipeStepDetailFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_recipe_step_detail, container, false);
         textView = view.findViewById(R.id.textview_StepDetailFragment);
-//
-//        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show();
+        playerPlaceholder = view.findViewById(R.id.placeholder_of_player);
+        //for widgets
+        //     Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        //                .setAction("Action", null).show();
 
 
         exoMediaSetup(view, savedInstanceState, container);
@@ -83,16 +83,15 @@ public class RecipeStepDetailFragment extends Fragment {
             exoPlayer.stop();
             playerPosition = exoPlayer.getCurrentPosition();
         }
-
-
         super.onPause();
-
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("texts", texts);
+        outState.putString("videourl", videoURL);
+        //todo handle when phone rotate
+
     }
 
     @Override
@@ -116,16 +115,8 @@ public class RecipeStepDetailFragment extends Fragment {
             }
             //phone
             else if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
-                StepModel stepModel = getActivity().getIntent().getExtras().getParcelable(RecipeDetailFragment.STEP_RECIPE_PARC_KEY);
-                textView.setText(stepModel.getDescription());
-                String s = stepModel.getVideoURL();
-                String a = s.substring(s.length() - 3, s.length());
-                if (a.equals("mp4")) {
-                    Toast.makeText(getActivity(), "mp4==mp4", Toast.LENGTH_SHORT).show();
-                    videoURL = stepModel.getVideoURL();
-                }
 
-                Log.e("TAG", "exoMediaSetup: " + s.subSequence(s.length() - 3, s.length()));
+                isthatVideoUrl();
 
             }
 
@@ -157,6 +148,21 @@ public class RecipeStepDetailFragment extends Fragment {
 
         } catch (Exception e) {
             Log.e("tag", " exoplayer error " + e.toString());
+        }
+    }
+
+    private void isthatVideoUrl() {
+        StepModel stepModel = getActivity().getIntent().getExtras().getParcelable(RecipeDetailFragment.STEP_RECIPE_PARC_KEY);
+        textView.setText(stepModel.getDescription());
+        String URL = stepModel.getVideoURL();
+        boolean b = URL.substring(URL.length() - 3, URL.length()).equals("mp4");
+        if (b) {
+            Toast.makeText(getActivity(), "mp4==mp4", Toast.LENGTH_SHORT).show();
+            videoURL = stepModel.getVideoURL();
+            playerPlaceholder.setVisibility(View.GONE);
+        }
+        else{
+            playerPlaceholder.setVisibility(View.VISIBLE);
         }
     }
 

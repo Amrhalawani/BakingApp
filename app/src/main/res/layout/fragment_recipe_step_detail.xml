@@ -34,7 +34,7 @@
             android:src="@drawable/glovhand"
             android:scaleType="centerCrop"
             android:background="#fafafa"
-            android:visibility="gone"
+            android:visibility="visible"
             />
 
 
