@@ -29,6 +29,7 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.nd.amrhal.bakingapp.Models.RecipeModel;
 import com.nd.amrhal.bakingapp.Models.StepModel;
 
 
@@ -50,7 +51,7 @@ public class RecipeStepDetailFragment extends Fragment {
     private static long playerPosition = C.TIME_UNSET;
 
     TextView textView;
-    String texts = "";
+    int stepPosition = 0;
 
     public RecipeStepDetailFragment() {
         // Required empty public constructor
@@ -67,8 +68,6 @@ public class RecipeStepDetailFragment extends Fragment {
         //for widgets
         //     Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
         //                .setAction("Action", null).show();
-
-
         exoMediaSetup(view, savedInstanceState, container);
 
         return view;
@@ -89,7 +88,7 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("videourl", videoURL);
+       // outState.putString("videourl", videoURL);
         //todo handle when phone rotate
 
     }
@@ -107,16 +106,18 @@ public class RecipeStepDetailFragment extends Fragment {
     private void exoMediaSetup(View rootView, Bundle savedInstanceState, ViewGroup container) {
 
         try {
-
-
             //tablet
             if (Util.getPhoneOrTablet(getActivity()) == Util.TABLET) {
+                RecipeModel recipeModel = getActivity().getIntent().getExtras().getParcelable(RecipesActivity.RECIPE_PARC_KEY);
+                StepModel stepModel = recipeModel.getSteps().get( Util.getPositionfortabletonly(getActivity()) );
+                isthatVideoUrl(stepModel);
+
 
             }
             //phone
             else if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
-
-                isthatVideoUrl();
+                StepModel stepModel = getActivity().getIntent().getExtras().getParcelable(RecipeDetailFragment.STEP_RECIPE_PARC_KEY);
+                isthatVideoUrl(stepModel);
 
             }
 
@@ -135,11 +136,10 @@ public class RecipeStepDetailFragment extends Fragment {
             if (playerPosition != C.TIME_UNSET) {
                 exoPlayer.seekTo(playerPosition);
             }
-            if (texts.length() <= 2 && savedInstanceState != null) {
+            if (savedInstanceState != null) {
 
-                texts = savedInstanceState.getString("texts");
+                //todo saveinstance
 
-                textView.setText(texts);
             }
             if (container != null) {
                 container.removeAllViews();
@@ -151,8 +151,8 @@ public class RecipeStepDetailFragment extends Fragment {
         }
     }
 
-    private void isthatVideoUrl() {
-        StepModel stepModel = getActivity().getIntent().getExtras().getParcelable(RecipeDetailFragment.STEP_RECIPE_PARC_KEY);
+    private void isthatVideoUrl(StepModel stepModel) {
+
         textView.setText(stepModel.getDescription());
         String URL = stepModel.getVideoURL();
         boolean b = URL.substring(URL.length() - 3, URL.length()).equals("mp4");
@@ -160,16 +160,18 @@ public class RecipeStepDetailFragment extends Fragment {
             Toast.makeText(getActivity(), "mp4==mp4", Toast.LENGTH_SHORT).show();
             videoURL = stepModel.getVideoURL();
             playerPlaceholder.setVisibility(View.GONE);
-        }
-        else{
+        } else {
             playerPlaceholder.setVisibility(View.VISIBLE);
         }
     }
 
 
-    protected void displayReceivedData(String message) {
-        textView.setText("Data received: " + message);
-        texts = message;
+    protected void displayReceivedData(int position) {
+        Util.setPositionfortabletonly(getActivity(),position);
+
+        //getActivity().getFragmentManager().beginTransaction().remove().commit();
+
+
     }
 
 }

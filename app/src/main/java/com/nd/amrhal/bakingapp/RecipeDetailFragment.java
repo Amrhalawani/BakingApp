@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,7 +40,7 @@ public class RecipeDetailFragment extends Fragment {
     }
 
     interface SendMessage {
-        void sendData(String message);
+        void sendData(int message);
     }
 
     @Override
@@ -92,9 +93,18 @@ public class RecipeDetailFragment extends Fragment {
             @SuppressLint("ResourceType")
             @Override
             public void onItemClick(int position) {
+
                 //tablet
                 if (Util.getPhoneOrTablet(getActivity()) == Util.TABLET) {
-                    SM.sendData(" from fragment one we send " + position);
+
+                    Util.setPositionfortabletonly ( getActivity() , position );
+                    RecipeStepDetailFragment recipeDetailStepFragment = new RecipeStepDetailFragment();
+                    // recipeDetailStepFragment.setArguments(bundle);
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    fm.beginTransaction()
+                            .replace(R.id.FragmentStepDetail, recipeDetailStepFragment)
+                            .commit();
+
                 }
 
                 //phone
@@ -106,12 +116,6 @@ public class RecipeDetailFragment extends Fragment {
                     i.putExtra(STEP_RECIPE_PARC_KEY, stepModel); //Parcelable
                     startActivity(i);
 
-//
-//                    RecipeStepDetailFragment stepDetailFragment = new RecipeStepDetailFragment();
-//                    getActivity().getSupportFragmentManager()
-//                            .beginTransaction()
-//                            .add(R.id.FragmentDetail, stepDetailFragment)
-//                            .commit();
                 }
             }
         });

@@ -29,7 +29,6 @@ public class RecipesActivity extends AppCompatActivity {
     //http://www.jsonschema2pojo.org/
 
     final static String RECIPE_PARC_KEY = "recipemodel";
-    final static String INGREDIANT_PARC_KEY = "ingrediantmodel";
 // SwipeRefreshLayout mPullToRefresh = findViewById(R.id.swiperefresh_recipesactivity);
 
     Context context;

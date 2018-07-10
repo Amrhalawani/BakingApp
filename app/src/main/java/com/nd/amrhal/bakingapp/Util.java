@@ -8,8 +8,13 @@ public class Util {
 
     public static String TWO_PANE_SHAREDP = "mtwopane";
     public static String TWO_PANE_PHONE_OR_TABLET = "phoneortablet"; //0 for phone //1 for tablet
-    public static int PHONE  =  0  ; //0 for phone case
-    public static int TABLET =  1  ; //1 for tablet case
+    public static int PHONE  =  0  ;   //0 for phone case
+    public static int TABLET =  1  ;   //1 for tablet case
+//---------------
+    public static String POSITION_SHAREDP = "position"; //position value of steps recyclerView
+    public static String POSITION_VALUE = "positionvalue";
+
+
 
 
 
@@ -28,14 +33,19 @@ public class Util {
     }
 
 
-//    private String checkPhoneOrTablet(int i) {
-//        String result = "not specific Phone or Tablet";
-//        if (i == PHONE) {
-//            result = "it's a Phone";
-//        } else if (i == TABLET) {
-//            result = "it's a Tablet";
-//        }
-//        return result;
-//    }
+    public static void setPositionfortabletonly(Context context, int pos) {
+
+        context.getSharedPreferences(POSITION_SHAREDP, Context.MODE_PRIVATE).edit().putInt(POSITION_VALUE, pos ).apply();
+
+    }
+
+
+    public static int getPositionfortabletonly(Context context) {
+
+        int pos = context.getSharedPreferences(POSITION_SHAREDP, Context.MODE_PRIVATE).getInt(POSITION_VALUE, 0);
+
+        return pos;
+    }
+
 }
 

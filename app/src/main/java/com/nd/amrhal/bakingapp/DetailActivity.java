@@ -83,6 +83,12 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Util.setPositionfortabletonly(this, 0);
+    }
+
     private void setupRecipeDetailsFragment() {
 
 //       RecipeDetailFragment recipeDetailFragment = new RecipeDetailFragment();
@@ -103,7 +109,7 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
     }
 
     @Override
-    public void sendData(String message) {
+    public void sendData(int message) {
 
         RecipeStepDetailFragment f = (RecipeStepDetailFragment) getSupportFragmentManager().findFragmentByTag("fragment_tag_fragmentStepDetail");
         f.displayReceivedData(message);
