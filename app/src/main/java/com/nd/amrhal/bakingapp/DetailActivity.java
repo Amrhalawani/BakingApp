@@ -18,6 +18,7 @@ import java.util.List;
 public class DetailActivity extends AppCompatActivity implements RecipeDetailFragment.SendMessage {
 
     final static String INGREDIANT_LIST_KEY = "ingrediantlist";
+    final static String RECIPE_MODEL_SAVEINSTANCE_KEY = "recipemodelparcrotate";
 
 
     RecipeModel recipeModel;
@@ -41,7 +42,11 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
+        if (savedInstanceState == null) {
+            recipeModel = getIntent().getParcelableExtra(RecipesActivity.RECIPE_PARC_KEY);
+        } else {
+            recipeModel = savedInstanceState.getParcelable(RECIPE_MODEL_SAVEINSTANCE_KEY);
+        }
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(recipeModel.getName());
             getSupportActionBar().setElevation(20);
@@ -73,6 +78,12 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
 
         Toast.makeText(this, "phone or tablet" + Util.getPhoneOrTablet(DetailActivity.this), Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(RECIPE_MODEL_SAVEINSTANCE_KEY, recipeModel);
     }
 
     @Override

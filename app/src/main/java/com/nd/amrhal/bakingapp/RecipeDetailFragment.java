@@ -106,6 +106,7 @@ public class RecipeDetailFragment extends Fragment {
                             .commit();
 
                 }
+                
 
                 //phone
                 else if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
