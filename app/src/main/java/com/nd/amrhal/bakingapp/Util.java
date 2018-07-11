@@ -1,7 +1,6 @@
 package com.nd.amrhal.bakingapp;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 public class Util {
 
@@ -15,7 +14,8 @@ public class Util {
     public static String POSITION_VALUE = "positionvalue";
     //---------------- for widgets
     public static String WIDGET_SHAREDP = "widgetshared";
-    public static String WIDGET_STRING = "widgetstring";
+    public static String WIDGET_INGREDENT = "widgetingreduent";
+  public static String WIDGET_RECIPE_NAME = "widgetrecipename";
 
 
     public static void setPhoneOrTablet(Context context, int phoneortablet) {
@@ -49,16 +49,29 @@ public class Util {
     //---------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    public static void setSharedPValueforWidget(Context context, String IngreduentString) {
+    public static void setSharedPIngredientForWidget(Context context, String IngreduentString) {
 
-        context.getSharedPreferences(WIDGET_SHAREDP, Context.MODE_PRIVATE).edit().putString(WIDGET_STRING, IngreduentString).apply();
+        context.getSharedPreferences(WIDGET_SHAREDP, Context.MODE_PRIVATE).edit().putString(WIDGET_INGREDENT, IngreduentString).apply();
 
     }
 
 
-    public static String getSharedPValueforWidget(Context context) {
+    public static String getSharedPIngredientForWidget(Context context) {
 
-        String s = context.getSharedPreferences(WIDGET_SHAREDP, Context.MODE_PRIVATE).getString(WIDGET_STRING, "Nothing here");
+        String s = context.getSharedPreferences(WIDGET_SHAREDP, Context.MODE_PRIVATE).getString(WIDGET_INGREDENT, "Nothing here");
+
+        return s;
+    }
+    public static void setSharedPRecipeNameForWidget(Context context, String RecipeNme) {
+
+        context.getSharedPreferences(WIDGET_SHAREDP, Context.MODE_PRIVATE).edit().putString(WIDGET_RECIPE_NAME, RecipeNme).apply();
+
+    }
+
+
+    public static String getSharedPRecipeNameForWidget(Context context) {
+
+        String s = context.getSharedPreferences(WIDGET_SHAREDP, Context.MODE_PRIVATE).getString(WIDGET_RECIPE_NAME, "Nothing here");
 
         return s;
     }

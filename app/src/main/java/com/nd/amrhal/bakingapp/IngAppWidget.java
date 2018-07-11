@@ -14,12 +14,14 @@ public class IngAppWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = Util.getSharedPValueforWidget(context);
+        CharSequence widgetText = Util.getSharedPIngredientForWidget(context);
+        CharSequence RecipeName = Util.getSharedPRecipeNameForWidget(context);
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ing_app_widget);
 
         views.setTextViewText(R.id.appwidget_text, widgetText);
+        views.setTextViewText(R.id.widget_Recipe_name_TV, RecipeName);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

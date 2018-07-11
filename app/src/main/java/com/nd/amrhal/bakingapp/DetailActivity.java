@@ -102,8 +102,8 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
                 Toast.makeText(this, "Added To Widgets", Toast.LENGTH_SHORT).show();
                 //add this ingredent of recipe to shared prafrace value and we will use it for an widgets
 
-                Util.setSharedPValueforWidget(this, setupingredientListtoString(recipeModel.getIngredients()));
-
+                Util.setSharedPIngredientForWidget(this, setupingredientListtoString(recipeModel.getIngredients()));
+                Util.setSharedPRecipeNameForWidget(this, recipeModel.getName());
                 return true;
             default:
                 // If we got here, the user's action was not recognized.
