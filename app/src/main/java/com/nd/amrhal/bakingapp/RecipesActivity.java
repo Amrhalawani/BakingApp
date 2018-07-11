@@ -6,12 +6,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.test.espresso.IdlingResource;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nd.amrhal.bakingapp.IdlingResource.SimpleIdlingResource;
@@ -29,7 +33,7 @@ public class RecipesActivity extends AppCompatActivity {
     //http://www.jsonschema2pojo.org/
 
     final static String RECIPE_PARC_KEY = "recipemodel";
-// SwipeRefreshLayout mPullToRefresh = findViewById(R.id.swiperefresh_recipesactivity);
+// SwipeRefreshLayout mPullToRefresh = findViewById(R.id.swiperefresh_of_recipesactivity);
 
     Context context;
 
@@ -39,10 +43,19 @@ public class RecipesActivity extends AppCompatActivity {
     @Nullable
     SimpleIdlingResource mSimpleIdlingResource;
 
+    //for no connection
+    TextView noConnectionTV;
+    ImageView noconnectionIV;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipes);
+
+        noConnectionTV = findViewById(R.id.noconn_tv_id);
+        noconnectionIV = findViewById(R.id.noconn_iv_id);
 
         final RecyclerView recyclerView = findViewById(R.id.recycler_view);
 //        recyclerView.setSaveEnabled(true);
@@ -56,8 +69,14 @@ public class RecipesActivity extends AppCompatActivity {
         Observer<List<RecipeModel>> nameObserver = new Observer<List<RecipeModel>>() {
             @Override
             public void onChanged(@Nullable final List<RecipeModel> recipeModels) {
+
+        noconnectionIV.setVisibility(View.GONE);
+        noConnectionTV.setVisibility(View.GONE);
+
                 recyclerAdaptor.updateData(recipeModels);
                 recyclerView.setAdapter(recyclerAdaptor);
+
+
 
                 mSimpleIdlingResource.setIdleState(true);
 

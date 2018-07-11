@@ -5,4 +5,9 @@
     <string name="Desc">Description</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="add_to_widgets">add to widgets</string>
+    <string name="there_is_no_internet_connection">There Is No Internet Connection</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="recipe_name">Recipe Name</string>
 </resources>

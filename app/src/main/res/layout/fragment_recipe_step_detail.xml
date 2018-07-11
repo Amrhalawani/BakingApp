@@ -9,55 +9,62 @@
     android:background="@color/white"
     tools:context=".RecipeStepDetailFragment">
     <!--dont use alpha in your layout when using exoplayer-->
-    <android.support.constraint.ConstraintLayout
+
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:id="@+id/exo_player_view"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:background="#0b0b0b"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
-        </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
+            <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+                android:id="@+id/exo_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#0b0b0b"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/placeholder_of_player"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:src="@drawable/glovhand"
-            android:scaleType="centerCrop"
-            android:background="#fafafa"
-            android:visibility="visible"
-            />
+            </com.google.android.exoplayer2.ui.SimpleExoPlayerView>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/exo_player_view"
-            >
-            <TextView
-                android:id="@+id/textview_StepDetailFragment"
+            <ImageView
+                android:id="@+id/placeholder_of_player"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:background="#fafafa"
+                android:scaleType="centerCrop"
+                android:src="@drawable/glovhand"
+                android:visibility="visible" />
+
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Desc"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
-                android:gravity="start"
-               />
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:background="#e6e6e6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/exo_player_view">
 
-        </ScrollView>
-    </android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textview_StepDetailFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:fontFamily="@font/coustard"
+                    android:text="@string/Desc"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+            </ScrollView>
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 
 </FrameLayout>

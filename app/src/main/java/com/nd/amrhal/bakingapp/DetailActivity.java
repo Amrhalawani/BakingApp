@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -47,6 +49,7 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
         } else {
             recipeModel = savedInstanceState.getParcelable(RECIPE_MODEL_SAVEINSTANCE_KEY);
         }
+
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(recipeModel.getName());
             getSupportActionBar().setElevation(20);
@@ -88,10 +91,33 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                // User chose the "Settings" item, show the app settings UI...
+                return true;
+
+            case R.id.action_addto_widgets:
+
+                Toast.makeText(this, "Added To Widgets", Toast.LENGTH_SHORT).show();
+                //add this ingredent of recipe to shared prafrace value and we will use it for an widgets
+
+                Util.setSharedPValueforWidget(this, setupingredientListtoString(recipeModel.getIngredients()));
+
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     @Override
@@ -119,6 +145,17 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
 
     }
 
+    private String setupingredientListtoString(List<IngredientModel> ingredientList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int j = 0; j < ingredientList.size(); j++) {
+            String a = " \u273B " + ingredientList.get(j).getIngredient()
+                    + " (" + ingredientList.get(j).getQuantity()
+                    + " " + ingredientList.get(j).getMeasure() + ").\n";
+            stringBuilder.append(a);
+        }
+        return stringBuilder.toString();
+    }
+
     @Override
     public void sendData(int message) {
 
@@ -127,4 +164,5 @@ public class DetailActivity extends AppCompatActivity implements RecipeDetailFra
 
 
     }
+
 }

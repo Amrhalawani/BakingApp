@@ -9,5 +9,6 @@
     <color name="pressed">#c2414141</color>
     <color name="selected">#680000</color>
     <color name="white">#ffffff</color>
+    <color name="widget_background_color">#f48e9f</color>
 
 </resources>
