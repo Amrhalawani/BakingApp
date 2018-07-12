@@ -214,6 +214,7 @@ public class RecipeStepDetailFragment extends Fragment {
             videoURL = stepModel.getVideoURL();
             playerPlaceholder.setVisibility(View.GONE);
         } else {
+
             playerPlaceholder.setVisibility(View.VISIBLE);
         }
     }
