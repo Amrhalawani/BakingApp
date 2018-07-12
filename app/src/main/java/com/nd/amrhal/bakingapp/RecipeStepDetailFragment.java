@@ -39,31 +39,26 @@ public class RecipeStepDetailFragment extends Fragment {
 
 
     SimpleExoPlayer exoPlayer;
-    private int position;
-    private static long PositionPlayer = C.TIME_UNSET;
     //String videoURL = "http://blueappsoftware.in/layout_design_android_blog.mp4";
     String videoURL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd9cb_4-press-crumbs-in-pie-plate-creampie/4-press-crumbs-in-pie-plate-creampie.mp4";
     private ImageView placeholder;
     SimpleExoPlayerView exoPlayerView;
     ImageView playerPlaceholder;
     boolean playState = true;
-
     private static long playerPosition = C.TIME_UNSET;
-
-    TextView textView;
-
+    TextView discriptionTV;
+    MediaSource mediaSource;
 
     public RecipeStepDetailFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_recipe_step_detail, container, false);
-        textView = view.findViewById(R.id.textview_StepDetailFragment);
+        discriptionTV = view.findViewById(R.id.textview_StepDetailFragment);
         playerPlaceholder = view.findViewById(R.id.placeholder_of_player);
 
         exoMediaSetup(view, savedInstanceState, container);
@@ -89,7 +84,6 @@ public class RecipeStepDetailFragment extends Fragment {
             exoPlayer.stop();
             playerPosition = exoPlayer.getCurrentPosition();
             playState = false;
-
         }
         super.onPause();
     }
@@ -108,14 +102,15 @@ public class RecipeStepDetailFragment extends Fragment {
         super.onResume();
         exoPlayer.seekTo(playerPosition);
         exoPlayer.setPlayWhenReady(playState);
+        intializeExoPlayer();
     }
-
 
     private void exoMediaSetup(View rootView, Bundle savedInstanceState, ViewGroup container) {
 
         try {
             exoPlayerView = rootView.findViewById(R.id.exo_player_view);
-            //tablet
+//------------------------------------------------------------------------------------------------------------------
+//tablet
             if (Util.getPhoneOrTablet(getActivity()) == Util.TABLET) {
                 RecipeModel recipeModel = getActivity().getIntent().getExtras().getParcelable(RecipesActivity.RECIPE_PARC_KEY);
                 StepModel stepModel = recipeModel.getSteps().get(Util.getPositionfortabletonly(getActivity()));
@@ -123,16 +118,13 @@ public class RecipeStepDetailFragment extends Fragment {
 
                 if (stepModel.getVideoURL().isEmpty()) {
                     handleTHumbnail(stepModel);
-
                 } else {
                     handleVideo(stepModel);
                 }
-
-                textView.setText(stepModel.getDescription());
-
-
+                discriptionTV.setText(stepModel.getDescription());
             }
-            //phone
+
+//phone
             else if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
                 StepModel stepModel = getActivity().getIntent().getExtras().getParcelable(RecipeDetailFragment.STEP_RECIPE_PARC_KEY);
                 if (stepModel != null) {
@@ -143,10 +135,10 @@ public class RecipeStepDetailFragment extends Fragment {
                         handleVideo(stepModel);
                     }
                 }
-                textView.setText(stepModel.getDescription());
+                discriptionTV.setText(stepModel.getDescription());
             }
 
-
+//--------------------------------------------------------------------------------------------------------------
             if (savedInstanceState != null) {
                 playerPosition = savedInstanceState.getLong("position");
                 playState = savedInstanceState.getBoolean("playstate");
@@ -164,14 +156,13 @@ public class RecipeStepDetailFragment extends Fragment {
 
     private void intializeExoPlayer() {
 
-
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
         exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector);
         Uri videoURI = Uri.parse(videoURL);
         DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
         ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-        MediaSource mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
+        mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
         exoPlayerView.setPlayer(exoPlayer);
         exoPlayer.prepare(mediaSource);
         exoPlayer.setPlayWhenReady(playState);
@@ -205,8 +196,6 @@ public class RecipeStepDetailFragment extends Fragment {
     }
 
     private void handleVideo(StepModel stepModel) {
-
-
         String URL = stepModel.getVideoURL();
         boolean b = URL.substring(URL.length() - 3, URL.length()).equals("mp4");
         if (b) {
@@ -222,9 +211,7 @@ public class RecipeStepDetailFragment extends Fragment {
 
     protected void displayReceivedData(int position) {
         Util.setPositionfortabletonly(getActivity(), position);
-
         //getActivity().getFragmentManager().beginTransaction().remove().commit();
-
     }
 
 }
