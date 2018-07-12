@@ -6,7 +6,7 @@
     <corners
         android:topLeftRadius="2dp"
         android:topRightRadius="2dp"
-        android:bottomRightRadius="30dp"
+        android:bottomRightRadius="20dp"
         android:bottomLeftRadius="2dp">
     </corners>
     <gradient

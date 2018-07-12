@@ -2,88 +2,95 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:id="@+id/linearLayout"
-    >
-
-<android.support.v7.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    card_view:cardCornerRadius="10dp"
-    android:src="@drawable/placeholder"
-    android:layout_margin="4dp"
-    android:elevation="20dp"
-    android:background="@drawable/selector_color"
-    >
+    android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constrainLayout"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/selector_color"
+        android:elevation="20dp"
+        card_view:cardCornerRadius="10dp">
 
-
-        <net.wujingchao.android.view.SimpleTagImageView
-            xmlns:simple="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/item_servings_tag"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constrainLayout"
             android:layout_width="match_parent"
-            android:layout_height="200dip"
-            android:adjustViewBounds="true"
-            android:src="@drawable/placeholder"
-            simple:layout_constraintEnd_toEndOf="parent"
-            simple:layout_constraintStart_toStartOf="parent"
-            simple:layout_constraintTop_toTopOf="parent"
-            simple:simple_corner_distance="65dp"
-            simple:simple_tag_background_color="#ff626d"
-            simple:simple_tag_enable="true"
-            simple:simple_tag_orientation="right_top"
-            simple:simple_tag_text="test"
-            simple:simple_tag_round_radius="1dp"
-            simple:simple_tag_textColor="@color/white"
-            simple:simple_tag_textSize="14sp"
-            simple:simple_tag_width="23dip" />
+            android:layout_height="200dp">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:background="@drawable/selector_color"
-
-            app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
-            app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
-            app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
-            app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
+            <ImageView
+                android:id="@+id/recipe_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder"
+                app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
+                app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
+                app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
+                app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
 
 
-        <View
-            android:layout_width="300dp"
-            android:layout_height="1dp"
-            android:background="#fff"
-            app:layout_constraintEnd_toEndOf="@+id/item_recipe_name"
-            app:layout_constraintTop_toBottomOf="@+id/item_recipe_name" />
+            <net.wujingchao.android.view.SimpleTagImageView xmlns:simple="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/item_servings_tag"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:adjustViewBounds="true"
 
-        <TextView
-            android:id="@+id/item_recipe_name"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/arbonnie"
-            android:text="Recipe Name"
-            android:textColor="#ffffff"
-            android:textSize="55sp"
-            app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.11"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.58000004" />
+                android:src="@drawable/emptypic"
+                simple:layout_constraintEnd_toEndOf="parent"
+                simple:layout_constraintStart_toStartOf="parent"
+                simple:layout_constraintTop_toTopOf="parent"
+                simple:simple_corner_distance="65dp"
+                simple:simple_tag_background_color="#ff626d"
+                simple:simple_tag_enable="true"
+                simple:simple_tag_orientation="right_top"
+                simple:simple_tag_round_radius="1dp"
+                simple:simple_tag_text="test"
+                simple:simple_tag_textColor="@color/white"
+                simple:simple_tag_textSize="14sp"
+                simple:simple_tag_width="23dip" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:background="@drawable/selector_color"
+
+                app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
+                app:layout_constraintEnd_toEndOf="@+id/item_servings_tag"
+                app:layout_constraintStart_toStartOf="@+id/item_servings_tag"
+                app:layout_constraintTop_toTopOf="@+id/item_servings_tag" />
 
 
-    </android.support.constraint.ConstraintLayout>
+            <View
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:background="#fff"
+                app:layout_constraintEnd_toEndOf="@+id/item_recipe_name"
+                app:layout_constraintTop_toBottomOf="@+id/item_recipe_name" />
 
-</android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/item_recipe_name"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/arbonnie"
+                android:text="Recipe Name"
+                android:textColor="#ffffff"
+                android:textSize="55sp"
+                app:layout_constraintBottom_toBottomOf="@+id/item_servings_tag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.11"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.58000004" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
 </LinearLayout>
 

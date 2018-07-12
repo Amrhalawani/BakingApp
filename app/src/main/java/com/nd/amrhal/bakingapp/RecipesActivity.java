@@ -77,7 +77,6 @@ public class RecipesActivity extends AppCompatActivity {
                 recyclerView.setAdapter(recyclerAdaptor);
 
 
-
                 mSimpleIdlingResource.setIdleState(true);
 
                 recyclerAdaptor.setOnItemClickListener(new RecipesRecyclerAdaptor.OnItemClickListener() {

@@ -4,8 +4,6 @@ package com.nd.amrhal.bakingapp;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +29,7 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.nd.amrhal.bakingapp.Models.RecipeModel;
 import com.nd.amrhal.bakingapp.Models.StepModel;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -47,11 +46,12 @@ public class RecipeStepDetailFragment extends Fragment {
     private ImageView placeholder;
     SimpleExoPlayerView exoPlayerView;
     ImageView playerPlaceholder;
+    boolean playState = true;
 
     private static long playerPosition = C.TIME_UNSET;
 
     TextView textView;
-    int stepPosition = 0;
+
 
     public RecipeStepDetailFragment() {
         // Required empty public constructor
@@ -65,14 +65,21 @@ public class RecipeStepDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recipe_step_detail, container, false);
         textView = view.findViewById(R.id.textview_StepDetailFragment);
         playerPlaceholder = view.findViewById(R.id.placeholder_of_player);
-        //for widgets
-        //     Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-        //                .setAction("Action", null).show();
+
         exoMediaSetup(view, savedInstanceState, container);
 
         return view;
     }
 
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // outState.putString("videourl", videoURL);
+        outState.putBoolean("playstate", playState);
+        outState.putLong("position", playerPosition);
+
+    }
 
     @Override
     public void onPause() {
@@ -81,16 +88,10 @@ public class RecipeStepDetailFragment extends Fragment {
             exoPlayer.release();
             exoPlayer.stop();
             playerPosition = exoPlayer.getCurrentPosition();
+            playState = false;
+
         }
         super.onPause();
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-       // outState.putString("videourl", videoURL);
-        //todo handle when phone rotate
-
     }
 
     @Override
@@ -102,48 +103,57 @@ public class RecipeStepDetailFragment extends Fragment {
         super.onDestroy();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        exoPlayer.seekTo(playerPosition);
+        exoPlayer.setPlayWhenReady(playState);
+    }
+
 
     private void exoMediaSetup(View rootView, Bundle savedInstanceState, ViewGroup container) {
 
         try {
+            exoPlayerView = rootView.findViewById(R.id.exo_player_view);
             //tablet
             if (Util.getPhoneOrTablet(getActivity()) == Util.TABLET) {
                 RecipeModel recipeModel = getActivity().getIntent().getExtras().getParcelable(RecipesActivity.RECIPE_PARC_KEY);
-                StepModel stepModel = recipeModel.getSteps().get( Util.getPositionfortabletonly(getActivity()) );
-                isthatVideoUrl(stepModel);
+                StepModel stepModel = recipeModel.getSteps().get(Util.getPositionfortabletonly(getActivity()));
+                String URL = stepModel.getVideoURL();
+
+                if (stepModel.getVideoURL().isEmpty()) {
+                    handleTHumbnail(stepModel);
+
+                } else {
+                    handleVideo(stepModel);
+                }
+
+                textView.setText(stepModel.getDescription());
 
 
             }
             //phone
             else if (Util.getPhoneOrTablet(getActivity()) == Util.PHONE) {
                 StepModel stepModel = getActivity().getIntent().getExtras().getParcelable(RecipeDetailFragment.STEP_RECIPE_PARC_KEY);
-                isthatVideoUrl(stepModel);
+                if (stepModel != null) {
+                    if (stepModel.getVideoURL().isEmpty()) {
+                        handleTHumbnail(stepModel);
 
+                    } else {
+                        handleVideo(stepModel);
+                    }
+                }
+                textView.setText(stepModel.getDescription());
             }
 
-            exoPlayerView = rootView.findViewById(R.id.exo_player_view);
 
-            BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-            TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
-            exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector);
-            Uri videoURI = Uri.parse(videoURL);
-            DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
-            ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-            MediaSource mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
-            exoPlayerView.setPlayer(exoPlayer);
-            exoPlayer.prepare(mediaSource);
-            exoPlayer.setPlayWhenReady(true);
-            if (playerPosition != C.TIME_UNSET) {
-                exoPlayer.seekTo(playerPosition);
-            }
             if (savedInstanceState != null) {
-
-                //todo saveinstance
+                playerPosition = savedInstanceState.getLong("position");
+                playState = savedInstanceState.getBoolean("playstate");
 
             }
-            if (container != null) {
-                container.removeAllViews();
-            }
+
+            intializeExoPlayer();
 
 
         } catch (Exception e) {
@@ -151,9 +161,52 @@ public class RecipeStepDetailFragment extends Fragment {
         }
     }
 
-    private void isthatVideoUrl(StepModel stepModel) {
 
-        textView.setText(stepModel.getDescription());
+    private void intializeExoPlayer() {
+
+
+        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+        TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
+        exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector);
+        Uri videoURI = Uri.parse(videoURL);
+        DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
+        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+        MediaSource mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
+        exoPlayerView.setPlayer(exoPlayer);
+        exoPlayer.prepare(mediaSource);
+        exoPlayer.setPlayWhenReady(playState);
+        if (playerPosition != C.TIME_UNSET) {
+            exoPlayer.seekTo(playerPosition);
+        }
+
+    }
+
+    private void handleTHumbnail(StepModel stepModel) {
+        String thumbnailURL = stepModel.getThumbnailURL();
+        if (!thumbnailURL.isEmpty()) {
+            boolean checkEx = thumbnailURL.substring(thumbnailURL.length() - 3, thumbnailURL.length()).equals("jpg");
+
+            if (!thumbnailURL.isEmpty() && checkEx) {
+                playerPlaceholder.setVisibility(View.VISIBLE);
+                Picasso.get()
+                        .load(stepModel.getThumbnailURL())
+                        .placeholder(R.drawable.glovhand)
+                        .into(playerPlaceholder);
+            }
+
+        } else {
+            Picasso.get()
+                    .load(R.drawable.glovhand)
+                    .into(playerPlaceholder);
+
+        }
+
+
+    }
+
+    private void handleVideo(StepModel stepModel) {
+
+
         String URL = stepModel.getVideoURL();
         boolean b = URL.substring(URL.length() - 3, URL.length()).equals("mp4");
         if (b) {
@@ -167,10 +220,9 @@ public class RecipeStepDetailFragment extends Fragment {
 
 
     protected void displayReceivedData(int position) {
-        Util.setPositionfortabletonly(getActivity(),position);
+        Util.setPositionfortabletonly(getActivity(), position);
 
         //getActivity().getFragmentManager().beginTransaction().remove().commit();
-
 
     }
 

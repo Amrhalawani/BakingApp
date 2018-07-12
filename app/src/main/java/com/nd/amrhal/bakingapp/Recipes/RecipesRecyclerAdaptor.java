@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nd.amrhal.bakingapp.Models.RecipeModel;
 import com.nd.amrhal.bakingapp.R;
+import com.squareup.picasso.Picasso;
 
 import net.wujingchao.android.view.SimpleTagImageView;
 
@@ -61,6 +63,12 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
         holder.RecipeName.setText(RModel.getName());
         holder.mSimpleTagImageViewServings.setTagText("Servings: " + RModel.getServings()); // text Tag lib
 
+        if (!RModel.getImage().isEmpty()) {
+            Picasso.get()
+                    .load(RModel.getImage())
+                    .placeholder(R.drawable.placeholder)
+                    .into(holder.thumbnail);
+        }
     }
 
     @Override
@@ -82,6 +90,7 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
         SimpleTagImageView mSimpleTagImageViewServings;
         ConstraintLayout constraintLayout;
         LinearLayout linearLayout;
+        ImageView thumbnail;
 
         public myViewholder(View itemView) {
             super(itemView);
@@ -90,6 +99,7 @@ public class RecipesRecyclerAdaptor extends RecyclerView.Adapter<RecipesRecycler
             mSimpleTagImageViewServings = itemView.findViewById(R.id.item_servings_tag);
             constraintLayout = itemView.findViewById(R.id.constrainLayout);
             linearLayout = itemView.findViewById(R.id.linearLayout);
+            thumbnail = itemView.findViewById(R.id.recipe_thumbnail);
             itemView.setOnClickListener(this);
         }
 

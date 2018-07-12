@@ -7,14 +7,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class RecipeModel implements Parcelable{
+public class RecipeModel implements Parcelable {
 
-    public RecipeModel(int id, String name, List<IngredientModel> ingredients, List<StepModel> steps, int servings) {
+    public RecipeModel(int id, String name, List<IngredientModel> ingredients, List<StepModel> steps, int servings, String image) {
         this.id = id;
         this.name = name;
         this.ingredients = ingredients;
         this.steps = steps;
         this.servings = servings;
+        this.image = image;
     }
 
     @SerializedName("id")
@@ -32,6 +33,17 @@ public class RecipeModel implements Parcelable{
 
     @SerializedName("servings")
     private int servings;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @SerializedName("image")
+    private String image;
 
 
     protected RecipeModel(Parcel in) {
