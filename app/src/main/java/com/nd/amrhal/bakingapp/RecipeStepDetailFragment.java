@@ -102,7 +102,7 @@ public class RecipeStepDetailFragment extends Fragment {
         super.onResume();
         exoPlayer.seekTo(playerPosition);
         exoPlayer.setPlayWhenReady(playState);
-        intializeExoPlayer();
+       // intializeExoPlayer();
     }
 
     private void exoMediaSetup(View rootView, Bundle savedInstanceState, ViewGroup container) {
