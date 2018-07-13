@@ -47,7 +47,14 @@ public class RecipeStepDetailFragment extends Fragment {
     boolean playState = true;
     private static long playerPosition = C.TIME_UNSET;
     TextView discriptionTV;
+
+    //exoplayer
     MediaSource mediaSource;
+    ExtractorsFactory extractorsFactory;
+    DefaultHttpDataSourceFactory dataSourceFactory;
+    Uri videoURI;
+    TrackSelector trackSelector;
+    BandwidthMeter bandwidthMeter;
 
     public RecipeStepDetailFragment() {
         // Required empty public constructor
@@ -84,6 +91,7 @@ public class RecipeStepDetailFragment extends Fragment {
             exoPlayer.stop();
             playerPosition = exoPlayer.getCurrentPosition();
             playState = false;
+            exoPlayer=null;
         }
         super.onPause();
     }
@@ -100,9 +108,17 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        exoPlayer.seekTo(playerPosition);
-        exoPlayer.setPlayWhenReady(playState);
-       // intializeExoPlayer();
+        if (exoPlayer != null) {
+           // exoPlayer.getPlaybackState();
+            exoPlayer.setPlayWhenReady(false);
+            exoPlayer.seekTo(playerPosition);
+            exoPlayer.prepare(mediaSource);
+            Toast.makeText( getActivity(), "ExoPlayer not null", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText( getActivity(), "ExoPlayer = null", Toast.LENGTH_SHORT).show();
+            intializeExoPlayer();
+        }
+
     }
 
     private void exoMediaSetup(View rootView, Bundle savedInstanceState, ViewGroup container) {
@@ -155,13 +171,12 @@ public class RecipeStepDetailFragment extends Fragment {
 
 
     private void intializeExoPlayer() {
-
-        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelector trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
+        bandwidthMeter = new DefaultBandwidthMeter();
+        trackSelector = new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
         exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector);
-        Uri videoURI = Uri.parse(videoURL);
-        DefaultHttpDataSourceFactory dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
-        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
+        videoURI = Uri.parse(videoURL);
+        dataSourceFactory = new DefaultHttpDataSourceFactory("exoplayer_video");
+        extractorsFactory = new DefaultExtractorsFactory();
         mediaSource = new ExtractorMediaSource(videoURI, dataSourceFactory, extractorsFactory, null, null);
         exoPlayerView.setPlayer(exoPlayer);
         exoPlayer.prepare(mediaSource);
