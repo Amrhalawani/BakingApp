@@ -87,9 +87,9 @@ public class RecipeStepDetailFragment extends Fragment {
     public void onPause() {
 
         if (exoPlayer != null) {
+            playerPosition = exoPlayer.getCurrentPosition();
             exoPlayer.release();
             exoPlayer.stop();
-            playerPosition = exoPlayer.getCurrentPosition();
             playState = false;
             exoPlayer=null;
         }
@@ -109,7 +109,7 @@ public class RecipeStepDetailFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (exoPlayer != null) {
-       
+
             exoPlayer.setPlayWhenReady(false);
             exoPlayer.seekTo(playerPosition);
             exoPlayer.prepare(mediaSource);
