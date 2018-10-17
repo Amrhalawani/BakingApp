@@ -28,7 +28,6 @@ Homescreen widget
 #Icon made by Freepik from www.flaticon.com
 
 ![Alt text](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-043647.png)
-![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-043647.png) 
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-044700.png)
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-043553.png) 
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-043819.png)
@@ -36,5 +35,5 @@ Homescreen widget
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/threed_mockup%20(1).png)
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-044800.png)
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-044859.png)
-widget
+#ًWidget
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-045434.png)
