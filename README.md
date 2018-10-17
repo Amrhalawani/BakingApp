@@ -35,5 +35,5 @@ Homescreen widget
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/threed_mockup%20(1).png)
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-044800.png)
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-044859.png)
-#ًWidget
+## Widget
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-045434.png)
