@@ -27,7 +27,7 @@ Homescreen widget
 
 #Icon made by Freepik from www.flaticon.com
 
-
+![Alt text](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-043647.png)
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-043647.png) 
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-044700.png)
 ![Phone](https://github.com/Amrhalawani/BakingApp/blob/master/screenshoots/device-2018-10-17-043553.png) 
