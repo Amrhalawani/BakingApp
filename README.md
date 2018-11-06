@@ -1,10 +1,10 @@
 
 # BakingApp
-A Functioning Android App which I built as one of my project during my Udacity Android Developer scolarship
+A Functioning Android App which I built as one of my projects of Udacity Android Developer scholarship
 
 ## Feature
 * This app showcases responsive UI both for phone and tablet devices.
-*  Make networking calls to retrieve recipes and Show it in a list
+* Make networking calls to retrieve recipes and Show it in a list
 * Show a list of steps involved and a video icon if the step has a video
 * Show a Card containing the ingredients of the recipe
 * Use Exoplayer to show videos of steps involved in a recipe.
